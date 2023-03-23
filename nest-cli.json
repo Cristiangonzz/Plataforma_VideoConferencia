@@ -28,13 +28,13 @@
         "tsConfigPath": "apps/usuario/tsconfig.app.json"
       }
     },
-    "lista-usuario": {
+    "cuenta": {
       "type": "application",
-      "root": "apps/lista-usuario",
+      "root": "apps/cuenta",
       "entryFile": "main",
-      "sourceRoot": "apps/lista-usuario/src",
+      "sourceRoot": "apps/cuenta/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/lista-usuario/tsconfig.app.json"
+        "tsConfigPath": "apps/cuenta/tsconfig.app.json"
       }
     }
   }
