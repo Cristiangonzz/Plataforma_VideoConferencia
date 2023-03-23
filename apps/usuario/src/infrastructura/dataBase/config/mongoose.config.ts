@@ -10,7 +10,7 @@ export class MongooseConfigService implements MongooseOptionsFactory {
     
   createMongooseOptions(): MongooseModuleOptions {
     return {
-      uri: 'mongodb://localhost/nest',
+      uri: 'mongodb+srv://cristianuruuy:1234@cluster0.tmv8fk5.mongodb.net/?retryWrites=true&w=majority',
     };
   }
 }
