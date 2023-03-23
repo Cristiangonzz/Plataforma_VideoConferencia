@@ -1,6 +1,6 @@
 import { Observable } from "rxjs";
 import { PersonaModel } from "../../dominio/model/persona";
-import { IUsuarioRepository } from "../../dominio/repositories/usuario.repositoy";
+import { IUsuarioRepository } from "../../dominio/repositories/usuario-repository-base.repositoy";
 import { createHash } from "crypto";
 
 export class RegistrarUsuarioUseCase {      /*implements IUseCase<PersonaModel, PersonaModel> Para ver que es lo que tiene que recibir el caso de uso como un camnado y una respuesta */
