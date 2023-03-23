@@ -6,6 +6,12 @@ import { EmpresaModel } from '../../../dominio/model/empresa.model';
 @Schema({collection: 'Empresa',versionKey: false})
 export class EmpresaSchema extends EmpresaModel {
  
+  @Prop({
+    type: String,
+    index: true,
+    required: true,
+  })
+  nombre: string;
 
   @Prop({
       type: String,
@@ -13,7 +19,7 @@ export class EmpresaSchema extends EmpresaModel {
       unique: true,
       required: true,
     })
-    mailEmpresarial: number;
+    mail: string;
     
     @Prop({
         type: String,
@@ -21,12 +27,35 @@ export class EmpresaSchema extends EmpresaModel {
         required: true,
     })
     clave: string;
+
+
+    @Prop({
+      type: Number,
+      index: true,
+      required: true,
+    })
+    cantidadEmpleado:number;
+
+    @Prop({
+      type: Number,
+      index: true,
+      unique: true,
+      required: true,
+    })
+    rut:number;
+
+    @Prop({
+      type: String,
+      index: true,
+      required: true,
+    })
+    rubro: string 
 }
 
 /**
  * define la forma en que los documentos deben ser organizados dentro de una colección.
  * hidrata el esquema ya definido de nodejs y mongoose para que sea como un documento de mongoDB
  */
-export type PersonaDocument = HydratedDocument<PersonaSchema>;
+export type EmpresaDocument = HydratedDocument<EmpresaSchema>;
 
-export const personaSchemaFactory = SchemaFactory.createForClass(PersonaSchema);
+export const EmpresaSchemaFactory = SchemaFactory.createForClass(EmpresaSchema);

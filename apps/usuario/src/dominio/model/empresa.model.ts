@@ -2,9 +2,9 @@ import { DatosBasicos } from './interface/datos-basicos.interface';
 export class EmpresaModel implements DatosBasicos {
     nombre: string;
     email: string;
-    contrasenia: string;
+    clave: string;
     
     cantidadEmpleado:number;
-    rut:string;
+    rut:number;
     rubro: string ;
 }
