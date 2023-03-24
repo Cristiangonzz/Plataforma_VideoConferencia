@@ -7,4 +7,5 @@ export interface IUsuarioRepository<T> {
     findAll(): Observable<T[]>;
     findOneBy(id: string): Observable<T>
     eliminar(id: string): Observable<T>;
+    
 }

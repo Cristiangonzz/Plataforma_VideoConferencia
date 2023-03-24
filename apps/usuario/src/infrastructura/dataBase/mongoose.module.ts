@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PersonaSchema, personaSchemaFactory } from './schema/persona.shema';
 import { MongooseConfigService } from './config/mongoose.config';
-import { PersonaController } from '../controllers/persona.controller';
 import { PersonaMongoService } from './services/persona.service.mongo';
 import { EmpresaRepository } from './repository/empresa.repository';
 import { PersonaRepository } from './repository/persona.repositoy';
 import { EmpresaSchema, EmpresaSchemaFactory } from './schema/empresa.shema';
+import { EmpresaMongoService } from './services/empresa.service.mongo';
 
 @Module({
   imports: [
@@ -24,13 +24,21 @@ import { EmpresaSchema, EmpresaSchemaFactory } from './schema/empresa.shema';
     MongooseConfigService,
 
     PersonaMongoService,
+    EmpresaMongoService,
+
     EmpresaRepository,
-    PersonaRepository],//servicios y repos(persona , empresa)
+    PersonaRepository,
+  ],
   exports: [
     MongooseModule,
     MongooseConfigService,
-    EmpresaRepository,
+
+    PersonaMongoService,
+    EmpresaMongoService,
+    
     PersonaRepository,
-    PersonaMongoService,],//se necesita exportar los repo?
+    EmpresaRepository,
+
+  ],
 })
 export class MongoModule {}

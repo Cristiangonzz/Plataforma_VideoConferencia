@@ -15,24 +15,16 @@ export class PersonaMongoService
         return this.personaRepository.registar(persona);
     }
     findAll(): Observable<PersonaSchema[]> {
-        throw new Error('Method not implemented.');
+        return this.personaRepository.findAll();
     }
     findOneBy(id: string): Observable<PersonaSchema> {
-        throw new Error('Method not implemented.');
+        return this.personaRepository.findOneBy(id);
     }
     Actualizar(id: string, perosna: PersonaSchema): Observable<PersonaSchema> {
-        throw new Error('Method not implemented.');
+       return this.personaRepository.actualizar(id, perosna);
     }
     eliminar(id: string): Observable<PersonaSchema> {
-        throw new Error('Method not implemented.');
+        return this.personaRepository.eliminar(id);
     }
-
-
-
-  
-
- 
-
-
 
 }

@@ -1,10 +1,11 @@
 import { Observable } from "rxjs";
-import { IUsuarioRepository } from "../../dominio/repositories/usuario-repository-base.repositoy";
 import { createHash } from "crypto";
 import { PersonaDomainEntity } from '../../dominio/model/persona';
+import { IPersonaDomainService } from "../../dominio/services/persona.domain.service";
 
 export class RegistrarUsuarioUseCase {      /*implements IUseCase<PersonaModel, PersonaModel> Para ver que es lo que tiene que recibir el caso de uso como un camnado y una respuesta */
-    constructor(private readonly usuarioRepository: IUsuarioRepository<PersonaDomainEntity>) { }
+  
+    constructor(private readonly usuarioService: IPersonaDomainService<PersonaDomainEntity>) { }
 
     execute(entity: PersonaDomainEntity): Observable<PersonaDomainEntity> {
 
@@ -12,6 +13,6 @@ export class RegistrarUsuarioUseCase {      /*implements IUseCase<PersonaModel, 
         .update(entity.clave)
         .digest('hex');
 
-        return this.usuarioRepository.registar(entity);
+        return this.usuarioService.registar(entity);
     }
 }
