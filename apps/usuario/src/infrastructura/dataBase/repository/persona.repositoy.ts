@@ -11,15 +11,15 @@ import { Model } from "mongoose";
 export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
     
     constructor(
-        @InjectModel(PersonaSchema.name) private readonly personaRepository: Model<PersonaDocument>
+        @InjectModel(PersonaSchema.name) private readonly personaModel: Model<PersonaDocument>
         ) { }
     
     registar(persona: PersonaSchema): Observable<PersonaSchema> {
-        return from(this.personaRepository.create(persona));
+        return from(this.personaModel.create(persona));
     }
     
     findAll(): Observable<PersonaSchema[]> {
-        return from(this.personaRepository.find()) //Como estoy usando lo inyectado y lo tipeo con PersonaDocument entonces siempre me va a devolver un array de PersonaDocument
+        return from(this.personaModel.find()) //Como estoy usando lo inyectado y lo tipeo con PersonaDocument entonces siempre me va a devolver un array de PersonaDocument
             .pipe(
                 map((persona: PersonaDocument[] ) =>  {
                     return persona;
@@ -27,7 +27,7 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
     }
 
     findOneBy(id: string): Observable<PersonaSchema> {
-        return from(this.personaRepository.findById(id))
+        return from(this.personaModel.findById(id))
             .pipe(
                 catchError((err:Error) => {
                     throw new Error(err.message);
@@ -36,7 +36,7 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
     }
 
     actualizar(id:string ,persona: PersonaSchema): Observable<PersonaSchema> {
-        return from(this.personaRepository.findByIdAndUpdate(id, persona, {new: true}))
+        return from(this.personaModel.findByIdAndUpdate(id, persona, {new: true}))
             .pipe(
                  catchError((err : Error) => {
                  throw new Error('No se encontro la persona');
@@ -45,7 +45,7 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
     }
 
     eliminar(id: string): Observable<PersonaSchema> {
-        return from(this.personaRepository.findByIdAndDelete(id))
+        return from(this.personaModel.findByIdAndDelete(id))
         .pipe(
             catchError((err:Error) => {
                 throw new Error('No se encontro la persona');

@@ -1,7 +1,8 @@
-import { DatosBasicos } from './interface/datos-basicos.interface';
-export class PersonaModel  implements DatosBasicos{
+import { IDatosBasicosModel } from './interface/datos-basicos.interface';
+
+export class PersonaDomainEntity  implements IDatosBasicosModel{
  
   nombre: string;
   email: string;
-  contrasenia: string;
+  clave: string;
 }

@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { EmpresaModel } from '../../../dominio/model/empresa.model';
+import { EmpresaDomainEntity } from '../../../dominio/model/empresa.model';
 
 
 @Schema({collection: 'Empresa',versionKey: false})
-export class EmpresaSchema extends EmpresaModel {
+export class EmpresaSchema extends EmpresaDomainEntity {
  
   @Prop({
     type: String,
