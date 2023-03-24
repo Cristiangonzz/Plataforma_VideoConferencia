@@ -1,19 +1,18 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { CreateCustomerDto } from '../dto/registrar-persona.dto';
 import { PersonaRepository } from '../dataBase/repository/persona.repositoy';
+import { PersonaService } from '../service/persona.service';
 
 
 @Controller('persona')
 export class PersonaController {
     constructor(
-        private readonly personaRepository: PersonaRepository,
+        private readonly personaService: PersonaService,
     ) {}
 
     @Post('/crear')
-     crearCesion(@Body() dato: CreateCustomerDto) {
-        return this.personaRepository.registar(dato);
+     crearPersona(@Body() dato: CreateCustomerDto) {
+        return this.personaService.registar(dato);
     }
- 
 
-  
 }

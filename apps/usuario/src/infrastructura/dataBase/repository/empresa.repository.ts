@@ -11,8 +11,7 @@ import { EmpresaSchema, EmpresaDocument } from '../schema/empresa.shema';
 export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
     
     constructor(
-        @InjectModel(EmpresaSchema.name) private readonly empresaModel: Model<EmpresaDocument>
-        ) { }
+        @InjectModel(EmpresaSchema.name) private readonly empresaModel: Model<EmpresaDocument>) { }
     
     registar(empresa: EmpresaSchema): Observable<EmpresaSchema> {
         return from(this.empresaModel.create(empresa));

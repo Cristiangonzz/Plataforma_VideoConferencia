@@ -10,8 +10,9 @@ export class PersonaMongoService
 {
  
   constructor(private readonly personaRepository: PersonaRepository) {}
+
     registar(persona: PersonaSchema): Observable<PersonaSchema> {
-        throw new Error('Method not implemented.');
+        return this.personaRepository.registar(persona);
     }
     findAll(): Observable<PersonaSchema[]> {
         throw new Error('Method not implemented.');

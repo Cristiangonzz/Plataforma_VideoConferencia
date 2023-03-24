@@ -9,5 +9,5 @@ export class CreateCustomerDto extends PersonaSchema{
     email: string;
 
     @IsString()
-    password: string;
+    clave: string;
 }

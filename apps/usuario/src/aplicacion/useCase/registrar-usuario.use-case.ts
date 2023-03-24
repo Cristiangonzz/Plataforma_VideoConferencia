@@ -1,15 +1,15 @@
 import { Observable } from "rxjs";
-import { PersonaModel } from "../../dominio/model/persona";
 import { IUsuarioRepository } from "../../dominio/repositories/usuario-repository-base.repositoy";
 import { createHash } from "crypto";
+import { PersonaDomainEntity } from '../../dominio/model/persona';
 
 export class RegistrarUsuarioUseCase {      /*implements IUseCase<PersonaModel, PersonaModel> Para ver que es lo que tiene que recibir el caso de uso como un camnado y una respuesta */
-    constructor(private readonly usuarioRepository: IUsuarioRepository<PersonaModel>) { }
+    constructor(private readonly usuarioRepository: IUsuarioRepository<PersonaDomainEntity>) { }
 
-    execute(entity: PersonaModel): Observable<PersonaModel> {
+    execute(entity: PersonaDomainEntity): Observable<PersonaDomainEntity> {
 
-        entity.contrasenia = createHash('sha512')
-        .update(entity.contrasenia)
+        entity.clave = createHash('sha512')
+        .update(entity.clave)
         .digest('hex');
 
         return this.usuarioRepository.registar(entity);
