@@ -1,5 +1,4 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreateCustomerDto } from '../dto/registrar-persona.dto';
 import { PersonaRepository } from '../dataBase/repository/persona.repositoy';
 import { EmpresaRepository } from '../dataBase/repository/empresa.repository';
 import { CrearEmpresaDto } from '../dto/registrar-empresa.dto';

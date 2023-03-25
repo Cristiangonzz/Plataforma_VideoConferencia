@@ -5,7 +5,7 @@ export class EmpresaDomainEntity implements IDatosBasicosModel , IEmpresaDomainM
     
     
     nombre: string;
-    email: string;
+    mail: string;
     clave: string;
     
     cantidadEmpleado: number;

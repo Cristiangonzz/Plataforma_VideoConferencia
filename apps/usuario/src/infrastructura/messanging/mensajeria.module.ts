@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
-import { PersonaRegistradaPublisher } from "./publisher/usuario-registrado.publisher";
+import { PersonaRegistradaPublisher } from "./publisher/persona/persona-registrado.publisher";
 @Module({
     imports: [
         ClientsModule.register([

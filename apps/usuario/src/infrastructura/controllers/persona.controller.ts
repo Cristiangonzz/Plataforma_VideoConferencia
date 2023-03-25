@@ -1,12 +1,14 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import {  RegistrarPersonaDto } from '../dto/registrar-persona.dto';
 import { PersonaService } from '../service/persona.service';
-import { PersonaRegistradaPublisher } from '../messanging/publisher/usuario-registrado.publisher';
-import { RegistrarUsuarioUseCase } from '../../aplicacion/useCase/registrar-usuario.use-case';
+import { PersonaRegistradaPublisher } from '../messanging/publisher/persona/persona-registrado.publisher';
 import { Observable, map, tap } from 'rxjs';
 import { PersonaSchema } from '../dataBase/schema/persona.shema';
 import { PersonaDomainEntity } from '../../dominio/model/persona';
 import { BuscarMail } from '../dto/buscar-mail..dto';
+import { RegistrarPersonaoUseCase } from '../../aplicacion/useCase/persona/registrar-persona.use-case';
+import { BuscarPersonaUseCase } from '../../aplicacion/useCase/persona/buscar-persona.use-case';
+import { PersonaBuscadaPublisher } from '../messanging/publisher/persona/persona-buscada.oublisher';
 
 
 @Controller('persona')
@@ -14,11 +16,12 @@ export class PersonaController {
     constructor(
         private readonly personaService: PersonaService,
         private readonly personaRegistradaPublisher : PersonaRegistradaPublisher,
+        private readonly personaBuscadaPublisher: PersonaBuscadaPublisher,
     ) {}
 
     @Post('/crear')
      crearPersona(@Body() persona: RegistrarPersonaDto):Observable<PersonaDomainEntity> {
-        const caso = new RegistrarUsuarioUseCase(this.personaService);
+        const caso = new RegistrarPersonaoUseCase(this.personaService);
         return caso.execute(persona)
         .pipe(
             tap((persona:RegistrarPersonaDto) => {
@@ -29,10 +32,15 @@ export class PersonaController {
             }));
     }
 
-    // @Get('buscar')
-    // buscarPersona(@Body() id: BuscarMail ):Observable<PersonaDomainEntity>{
-        
-    // }
+     @Get('buscar')
+     buscarPersona(@Body() id: BuscarMail ):Observable<PersonaDomainEntity>{
+        const caso = new BuscarPersonaUseCase(this.personaService);
+        return caso.execute(id).pipe(
+            tap((id:BuscarMail) => {
+                this.personaBuscadaPublisher.publish(id);
+            })
+        )
+     }
     
 
 }

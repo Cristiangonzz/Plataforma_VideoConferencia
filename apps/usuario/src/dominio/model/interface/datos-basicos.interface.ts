@@ -1,5 +1,5 @@
 export interface IDatosBasicosModel {
     nombre: string;
-    email: string;
+    mail: string;
     clave: string;
 }

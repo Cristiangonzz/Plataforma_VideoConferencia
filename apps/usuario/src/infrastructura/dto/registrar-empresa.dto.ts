@@ -1,7 +1,7 @@
 import { IsEmail, IsNumber, IsPositive, IsString } from "class-validator";
 import { EmpresaSchema } from '../dataBase/schema/empresa.shema';
 
-export class CrearEmpresaDto extends EmpresaSchema{
+export class RegistrarEmpresaDto extends EmpresaSchema{
     @IsString()
     nombre: string;
     

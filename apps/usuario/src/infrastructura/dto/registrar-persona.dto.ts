@@ -3,10 +3,10 @@ import { PersonaSchema } from "../dataBase/schema/persona.shema";
 
 export class RegistrarPersonaDto extends PersonaSchema{
     @IsString()
-    nombreCompleto: string;
+    nombre: string;
 
     @IsEmail()
-    email: string;
+    mail: string;
 
     @IsString()
     clave: string;

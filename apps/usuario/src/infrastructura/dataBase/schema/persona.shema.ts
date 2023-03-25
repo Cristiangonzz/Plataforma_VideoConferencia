@@ -10,7 +10,7 @@ export class PersonaSchema extends PersonaDomainEntity {
       index: true,
       required: true,
   })
-  nombreCompleto: string;
+  nombre: string;
 
   @Prop({
       type: String,
