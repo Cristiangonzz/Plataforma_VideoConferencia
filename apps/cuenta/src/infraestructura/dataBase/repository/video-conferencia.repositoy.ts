@@ -3,7 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 
 import { Model } from "mongoose";
 import { Observable, catchError, from, map } from "rxjs";
-import { ICuentaRepository } from '../../../dominio/repositorios/plataforma.repositorio';
+import { ICuentaRepository } from '../../../dominio/repositorios/video-conferencia.repositorio';
 import { videoConferenciaSchema, videoConferenciaDocument } from '../schema/video-conferencia.schema';
 
 @Injectable()

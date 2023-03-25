@@ -5,9 +5,9 @@ import { VideoConferenciaDomainEntity } from '../model/entidades/video-conferenc
 export interface IVideoConferenciaDomainService<T extends VideoConferenciaDomainEntity = VideoConferenciaDomainEntity> {
 
     registar(dato: T ):Observable<T>;
-    findAll(): Observable<T[]>;
     findOneBy(id: string): Observable<T>
     Actualizar(id: string , dato : T ):Observable<T>;
     eliminar(id: string): Observable<T>;
+    findAll(): Observable<T[]>;
     
 }
