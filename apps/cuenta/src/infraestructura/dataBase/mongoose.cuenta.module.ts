@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PersonaSchema, personaSchemaFactory } from './schema/video-conferencia.schema';
 import { MongooseConfigService } from './config/mongoose.config';
-import { PersonaMongoService } from './services/video-conferencia.service.mongo';
-import { EmpresaRepository } from './repository/plataforma.repository';
-import { PersonaRepository } from './repository/video-conferencia.repositoy';
-import { EmpresaMongoService } from './services/plataforma.service.mongo';
+import { VideoConferenciaMongoService } from './services/video-conferencia.service.mongo';
+import { PlataformaRepository } from './repository/plataforma.repository';
+import { VideoConferenciaRepository } from './repository/video-conferencia.repositoy';
+import { PlataformaMongoService } from './services/plataforma.service.mongo';
 import { ConfigService } from '@nestjs/config';
+import { PlataformaSchema, PlataformaSchemaFactory } from './schema/plataforma.schema';
+import { VideoconferenciaFactory, videoConferenciaSchema } from './schema/video-conferencia.schema';
 
 @Module({
   imports: [
@@ -15,8 +16,8 @@ import { ConfigService } from '@nestjs/config';
     }),
 
     MongooseModule.forFeature([
-      {name:PersonaSchema.name , schema:personaSchemaFactory},
-      {name:EmpresaSchema.name , schema:EmpresaSchemaFactory} 
+      {name:PlataformaSchema.name , schema:PlataformaSchemaFactory},
+      {name:videoConferenciaSchema.name , schema:VideoconferenciaFactory} 
     ])
   ],
   controllers: [],
@@ -24,25 +25,23 @@ import { ConfigService } from '@nestjs/config';
     MongooseConfigService,
     ConfigService,
 
-    PersonaMongoService,
-    EmpresaMongoService,
+    PlataformaMongoService,
+    VideoConferenciaMongoService,
 
-    EmpresaRepository,
-    PersonaRepository,
+    PlataformaRepository,
+    VideoConferenciaRepository,
   ],
   exports: [
     ConfigService,
-
-
     MongooseModule,
     MongooseConfigService,
 
-    PersonaMongoService,
-    EmpresaMongoService,
-    
-    PersonaRepository,
-    EmpresaRepository,
+    PlataformaMongoService,
+    VideoConferenciaMongoService,
+
+    PlataformaRepository,
+    VideoConferenciaRepository,
 
   ],
 })
-export class MongoModule {}
+export class MongoModuleCuenta {}
