@@ -35,12 +35,9 @@ export class PersonaController {
      @Get('buscar')
      buscarPersona(@Body() id: BuscarMail ):Observable<PersonaDomainEntity>{
         const caso = new BuscarPersonaUseCase(this.personaService);
-        return caso.execute(id).pipe(
-            tap((id:BuscarMail) => {
-                this.personaBuscadaPublisher.publish(id);
-            })
-        )
+        
+        return caso.execute(id).pipe(tap((data: PersonaDomainEntity) =>{
+            this.personaBuscadaPublisher.publish(data);
+        }))
      }
-    
-
 }

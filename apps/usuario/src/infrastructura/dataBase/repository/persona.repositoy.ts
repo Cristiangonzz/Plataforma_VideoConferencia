@@ -27,7 +27,7 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
     }
 
     findOneBy(id: string): Observable<PersonaSchema> {
-        return from(this.personaModel.findById(id))
+        return from(this.personaModel.findOne({mail: id}))
             .pipe(
                 catchError((err:Error) => {
                     throw new Error(err.message);

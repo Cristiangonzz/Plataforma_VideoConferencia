@@ -26,8 +26,10 @@ import { MensajeriaModule } from './infrastructura/messanging/mensajeria.module'
   controllers: [PersonaController, EmpresaController],
   providers: [
     ConfigService,
+
     PersonaService,
     EmpresaService,
+
     EmpresaRepository,
     PersonaRepository,
   ],

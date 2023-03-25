@@ -5,7 +5,7 @@ import { RegistrarEmpresaDto } from '../../../dto/registrar-empresa.dto';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class PersonaEmpresaPublisher {
+export class EmpresaRegistradaPublisher {
 
     constructor(
         @Inject('USUARIO_SERVICE') private readonly clienProxy: ClientProxy,

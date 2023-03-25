@@ -27,7 +27,7 @@ export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
     }
 
     findOneBy(id: string): Observable<EmpresaSchema> {
-        return from(this.empresaModel.findById(id))
+        return from(this.empresaModel.findOne({mail: id}))
             .pipe(
                 catchError((err:Error) => {
                     throw new Error(err.message);

@@ -11,8 +11,8 @@ export class PersonaBuscadaPublisher {
         @Inject('USUARIO_SERVICE') private readonly clienProxy: ClientProxy,
     ) { }
 
-    publish(data:BuscarMail) : Observable<BuscarMail> {
-        return this.clienProxy.emit( 'usuario.persona.Buscada',
+    publish(data:IDatosBasicosModel) : Observable<IDatosBasicosModel> {
+        return this.clienProxy.emit( 'usuario.persona.buscada',
             JSON.stringify({ data})
         )
     }
