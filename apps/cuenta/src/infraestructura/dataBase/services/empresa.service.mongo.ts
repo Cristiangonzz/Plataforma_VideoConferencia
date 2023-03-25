@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { IEmpresaDomainService } from '../../../dominio/services/empresa.domain.service';
 import { EmpresaSchema } from '../schema/plataforma.schema';
-import { EmpresaRepository } from '../repository/empresa.repository';
+import { EmpresaRepository } from '../repository/plataforma.repository';
 import { Observable } from "rxjs";
 
 

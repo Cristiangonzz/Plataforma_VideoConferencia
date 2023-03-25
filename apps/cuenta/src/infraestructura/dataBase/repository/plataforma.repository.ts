@@ -3,30 +3,29 @@ import { InjectModel } from "@nestjs/mongoose";
 
 import { Observable, catchError, from, map } from "rxjs";
 import { Model } from "mongoose";
-
-import { IUsuarioRepository } from "apps/usuario/src/dominio/repositories/usuario-repository-base.repositoy";
-import { EmpresaSchema, EmpresaDocument } from '../schema/plataforma.schema';
+import { ICuentaRepository } from '../../../dominio/repositorios/plataforma.repositorio';
+import { PlataformaSchema, PlataformaDocument } from '../schema/plataforma.schema';
 
 @Injectable()
-export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
+export class PlataformaRepository implements ICuentaRepository<PlataformaSchema>{
     
     constructor(
-        @InjectModel(EmpresaSchema.name) private readonly empresaModel: Model<EmpresaDocument>) { }
+        @InjectModel(PlataformaSchema.name) private readonly empresaModel: Model<PlataformaDocument>) { }
     
-    registar(empresa: EmpresaSchema): Observable<EmpresaSchema> {
+    registar(empresa: PlataformaSchema): Observable<PlataformaSchema> {
         return from(this.empresaModel.create(empresa));
     }
     
-    findAll(): Observable<EmpresaSchema[]> {
+    findAll(): Observable<PlataformaSchema[]> {
         //este find me devulve un arreglo de lo que le pase como parametro en repostiory y lo tipeo con empresaDocument
         return from(this.empresaModel.find()) //Como estoy usando lo inyectado y lo tipeo con empresaDocument entonces siempre me va a devolver un array de empresaDocument
             .pipe(
-                map((empresa: EmpresaDocument[] ) =>  {
+                map((empresa: PlataformaDocument[] ) =>  {
                     return empresa;
                 } ));
     }
 
-    findOneBy(id: string): Observable<EmpresaSchema> {
+    findOneBy(id: string): Observable<PlataformaSchema> {
         return from(this.empresaModel.findOne({mail: id}))
             .pipe(
                 catchError((err:Error) => {
@@ -35,7 +34,7 @@ export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
             ));
     }
 
-    actualizar(id:string ,empresa: EmpresaSchema): Observable<EmpresaSchema> {
+    actualizar(id:string ,empresa: PlataformaSchema): Observable<PlataformaSchema> {
         return from(this.empresaModel.findByIdAndUpdate(id, empresa, {new: true}))
             .pipe(
                  catchError((err : Error) => {
@@ -44,7 +43,7 @@ export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
     );
     }
 //
-    eliminar(id: string): Observable<EmpresaSchema> {
+    eliminar(id: string): Observable<PlataformaSchema> {
         return from(this.empresaModel.findByIdAndDelete(id))
         .pipe(
             catchError((err:Error) => {

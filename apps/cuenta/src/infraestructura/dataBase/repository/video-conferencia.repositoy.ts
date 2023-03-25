@@ -1,33 +1,32 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 
-import { Observable, catchError, from, map } from "rxjs";
-
-import { PersonaDocument, PersonaSchema } from '../schema/persona.shema';
-import { IUsuarioRepository } from "apps/usuario/src/dominio/repositories/usuario-repository-base.repositoy";
 import { Model } from "mongoose";
+import { Observable, catchError, from, map } from "rxjs";
+import { ICuentaRepository } from '../../../dominio/repositorios/plataforma.repositorio';
+import { videoConferenciaSchema, videoConferenciaDocument } from '../schema/video-conferencia.schema';
 
 @Injectable()
-export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
+export class VideoConferenciaRepository implements ICuentaRepository<videoConferenciaSchema>{
     
     constructor(
-        @InjectModel(PersonaSchema.name) private readonly personaModel: Model<PersonaDocument>
+        @InjectModel(videoConferenciaSchema.name) private readonly personaModel: Model<videoConferenciaDocument>
         ) { }
     
-    registar(persona: PersonaSchema): Observable<PersonaSchema> {
+    registar(persona: videoConferenciaSchema): Observable<videoConferenciaSchema> {
         return from(this.personaModel.create(persona));
     }
     
-    findAll(): Observable<PersonaSchema[]> {
+    findAll(): Observable<videoConferenciaSchema[]> {
         return from(this.personaModel.find()) //Como estoy usando lo inyectado y lo tipeo con PersonaDocument entonces siempre me va a devolver un array de PersonaDocument
             .pipe(
-                map((persona: PersonaDocument[] ) =>  {
+                map((persona: videoConferenciaDocument[] ) =>  {
                     return persona;
                 } ));
     }
 
-    findOneBy(id: string): Observable<PersonaSchema> {
-        return from(this.personaModel.findOne({mail: id}))
+    findOneBy(id: string): Observable<videoConferenciaSchema> {
+        return from(this.personaModel.findById(id))
             .pipe(
                 catchError((err:Error) => {
                     throw new Error(err.message);
@@ -35,7 +34,7 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
             ));
     }
 
-    actualizar(id:string ,persona: PersonaSchema): Observable<PersonaSchema> {
+    actualizar(id:string ,persona: videoConferenciaSchema): Observable<videoConferenciaSchema> {
         return from(this.personaModel.findByIdAndUpdate(id, persona, {new: true}))
             .pipe(
                  catchError((err : Error) => {
@@ -44,7 +43,7 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
     );
     }
 
-    eliminar(id: string): Observable<PersonaSchema> {
+    eliminar(id: string): Observable<videoConferenciaSchema> {
         return from(this.personaModel.findByIdAndDelete(id))
         .pipe(
             catchError((err:Error) => {

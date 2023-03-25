@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PersonaSchema, personaSchemaFactory } from './schema/persona.shema';
+import { PersonaSchema, personaSchemaFactory } from './schema/video-conferencia.schema';
 import { MongooseConfigService } from './config/mongoose.config';
 import { PersonaMongoService } from './services/persona.service.mongo';
-import { EmpresaRepository } from './repository/empresa.repository';
-import { PersonaRepository } from './repository/persona.repositoy';
-import { EmpresaSchema, EmpresaSchemaFactory } from './schema/plataforma.schema';
+import { EmpresaRepository } from './repository/plataforma.repository';
+import { PersonaRepository } from './repository/video-conferencia.repositoy';
 import { EmpresaMongoService } from './services/empresa.service.mongo';
 import { ConfigService } from '@nestjs/config';
 

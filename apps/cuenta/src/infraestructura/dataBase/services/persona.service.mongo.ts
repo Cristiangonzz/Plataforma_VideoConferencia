@@ -1,7 +1,7 @@
-import { PersonaSchema } from '../schema/persona.shema';
+import { PersonaSchema } from '../schema/video-conferencia.schema';
 import { IPersonaDomainService } from '../../../dominio/services/persona.domain.service';
 import { Injectable } from '@nestjs/common';
-import { PersonaRepository } from '../repository/persona.repositoy';
+import { PersonaRepository } from '../repository/video-conferencia.repositoy';
 import { Observable } from 'rxjs';
 
 @Injectable()
