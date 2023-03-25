@@ -3,7 +3,9 @@ import { createHash } from "crypto";
 import { PersonaDomainEntity } from '../../dominio/model/persona';
 import { IPersonaDomainService } from "../../dominio/services/persona.domain.service";
 
-export class RegistrarUsuarioUseCase {      /*implements IUseCase<PersonaModel, PersonaModel> Para ver que es lo que tiene que recibir el caso de uso como un camnado y una respuesta */
+
+
+export class RegistrarUsuarioUseCase {  
   
     constructor(private readonly usuarioService: IPersonaDomainService<PersonaDomainEntity>) { }
 
@@ -13,6 +15,6 @@ export class RegistrarUsuarioUseCase {      /*implements IUseCase<PersonaModel, 
         .update(entity.clave)
         .digest('hex');
 
-        return this.usuarioService.registar(entity);
+        return this.usuarioService.registar(entity); 
     }
 }

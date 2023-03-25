@@ -7,6 +7,7 @@ import { EmpresaRepository } from './repository/empresa.repository';
 import { PersonaRepository } from './repository/persona.repositoy';
 import { EmpresaSchema, EmpresaSchemaFactory } from './schema/empresa.shema';
 import { EmpresaMongoService } from './services/empresa.service.mongo';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -19,9 +20,10 @@ import { EmpresaMongoService } from './services/empresa.service.mongo';
       {name:EmpresaSchema.name , schema:EmpresaSchemaFactory} 
     ])
   ],
-  controllers: [],//controladores (persona , empresa)
+  controllers: [],
   providers: [
     MongooseConfigService,
+    ConfigService,
 
     PersonaMongoService,
     EmpresaMongoService,
@@ -30,6 +32,9 @@ import { EmpresaMongoService } from './services/empresa.service.mongo';
     PersonaRepository,
   ],
   exports: [
+    ConfigService,
+
+
     MongooseModule,
     MongooseConfigService,
 

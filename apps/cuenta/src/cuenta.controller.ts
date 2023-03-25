@@ -3,7 +3,7 @@ import { CuentaService } from './cuenta.service';
 
 @Controller()
 export class CuentaController {
-  constructor(private readonly cuentaService: CuentaService) {}
+  @EventPattern('persona-registrada')
 
   @Get()
   getHello(): string {
