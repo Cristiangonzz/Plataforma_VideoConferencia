@@ -18,7 +18,7 @@ export class PersonaSchema extends PersonaDomainEntity {
       unique: true,
       required: true,
     })
-    mail: number;
+    mail: string;
     
     @Prop({
         type: String,

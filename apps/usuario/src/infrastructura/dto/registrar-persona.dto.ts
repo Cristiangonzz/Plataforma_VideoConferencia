@@ -1,7 +1,7 @@
 import { IsEmail, IsString } from "class-validator";
 import { PersonaSchema } from "../dataBase/schema/persona.shema";
 
-export class CreateCustomerDto extends PersonaSchema{
+export class RegistrarPersonaDto extends PersonaSchema{
     @IsString()
     nombreCompleto: string;
 
