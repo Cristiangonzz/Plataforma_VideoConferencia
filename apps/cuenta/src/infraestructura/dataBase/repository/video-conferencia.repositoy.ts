@@ -10,23 +10,23 @@ import { videoConferenciaSchema, videoConferenciaDocument } from '../schema/vide
 export class VideoConferenciaRepository implements ICuentaRepository<videoConferenciaSchema>{
     
     constructor(
-        @InjectModel(videoConferenciaSchema.name) private readonly personaModel: Model<videoConferenciaDocument>
+        @InjectModel(videoConferenciaSchema.name) private readonly videoConferenciaModel: Model<videoConferenciaDocument>
         ) { }
     
-    registar(persona: videoConferenciaSchema): Observable<videoConferenciaSchema> {
-        return from(this.personaModel.create(persona));
+    registar(dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
+        return from(this.videoConferenciaModel.create(dato));
     }
     
     findAll(): Observable<videoConferenciaSchema[]> {
-        return from(this.personaModel.find()) //Como estoy usando lo inyectado y lo tipeo con PersonaDocument entonces siempre me va a devolver un array de PersonaDocument
+        return from(this.videoConferenciaModel.find()) 
             .pipe(
-                map((persona: videoConferenciaDocument[] ) =>  {
-                    return persona;
+                map((dato: videoConferenciaDocument[] ) =>  {
+                    return dato;
                 } ));
     }
 
     findOneBy(id: string): Observable<videoConferenciaSchema> {
-        return from(this.personaModel.findById(id))
+        return from(this.videoConferenciaModel.findById(id))
             .pipe(
                 catchError((err:Error) => {
                     throw new Error(err.message);
@@ -34,20 +34,21 @@ export class VideoConferenciaRepository implements ICuentaRepository<videoConfer
             ));
     }
 
-    actualizar(id:string ,persona: videoConferenciaSchema): Observable<videoConferenciaSchema> {
-        return from(this.personaModel.findByIdAndUpdate(id, persona, {new: true}))
+    actualizar(id:string ,dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
+        return from(this.videoConferenciaModel.findByIdAndUpdate(id, dato, {new: true}))
             .pipe(
                  catchError((err : Error) => {
-                 throw new Error('No se encontro la persona');
+                 throw new Error('No se encontro la VideoConferencia');
                  })
     );
+
     }
 
     eliminar(id: string): Observable<videoConferenciaSchema> {
-        return from(this.personaModel.findByIdAndDelete(id))
+        return from(this.videoConferenciaModel.findByIdAndDelete(id))
         .pipe(
             catchError((err:Error) => {
-                throw new Error('No se encontro la persona');
+                throw new Error('No se encontro la VideoConferencia');
             })
         );
     }

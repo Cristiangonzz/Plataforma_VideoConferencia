@@ -10,23 +10,23 @@ import { PlataformaSchema, PlataformaDocument } from '../schema/plataforma.schem
 export class PlataformaRepository implements ICuentaRepository<PlataformaSchema>{
     
     constructor(
-        @InjectModel(PlataformaSchema.name) private readonly empresaModel: Model<PlataformaDocument>) { }
+        @InjectModel(PlataformaSchema.name) private readonly plataformaModel: Model<PlataformaDocument>) { }
     
-    registar(empresa: PlataformaSchema): Observable<PlataformaSchema> {
-        return from(this.empresaModel.create(empresa));
+    registar(plataforma: PlataformaSchema): Observable<PlataformaSchema> {
+        return from(this.plataformaModel.create(plataforma));
     }
     
     findAll(): Observable<PlataformaSchema[]> {
-        //este find me devulve un arreglo de lo que le pase como parametro en repostiory y lo tipeo con empresaDocument
-        return from(this.empresaModel.find()) //Como estoy usando lo inyectado y lo tipeo con empresaDocument entonces siempre me va a devolver un array de empresaDocument
+       
+        return from(this.plataformaModel.find()) 
             .pipe(
-                map((empresa: PlataformaDocument[] ) =>  {
-                    return empresa;
+                map((plataforma: PlataformaDocument[] ) =>  {
+                    return plataforma;
                 } ));
     }
 
     findOneBy(id: string): Observable<PlataformaSchema> {
-        return from(this.empresaModel.findOne({mail: id}))
+        return from(this.plataformaModel.findById(id))
             .pipe(
                 catchError((err:Error) => {
                     throw new Error(err.message);
@@ -34,20 +34,20 @@ export class PlataformaRepository implements ICuentaRepository<PlataformaSchema>
             ));
     }
 
-    actualizar(id:string ,empresa: PlataformaSchema): Observable<PlataformaSchema> {
-        return from(this.empresaModel.findByIdAndUpdate(id, empresa, {new: true}))
+    actualizar(id:string ,plataforma: PlataformaSchema): Observable<PlataformaSchema> {
+        return from(this.plataformaModel.findByIdAndUpdate(id, plataforma, {new: true}))
             .pipe(
                  catchError((err : Error) => {
-                 throw new Error('No se encontro la empresa');
+                 throw new Error('No se encontro la plataforma');
                  })
     );
     }
 //
     eliminar(id: string): Observable<PlataformaSchema> {
-        return from(this.empresaModel.findByIdAndDelete(id))
+        return from(this.plataformaModel.findByIdAndDelete(id))
         .pipe(
             catchError((err:Error) => {
-                throw new Error('No se encontro la empresa');
+                throw new Error('No se encontro la plataforma');
             })
         );
     }
