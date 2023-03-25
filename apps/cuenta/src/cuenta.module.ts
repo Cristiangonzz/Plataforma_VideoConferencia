@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CuentaService } from './infraestructura/services/cuenta.service';
+import { CuentaService } from './infraestructura/services/plataforma.service';
 import { EventoController } from './evento.controller';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';

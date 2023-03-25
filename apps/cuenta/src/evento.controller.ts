@@ -1,5 +1,6 @@
 import { Controller } from "@nestjs/common";
 import { EventPattern, Payload } from "@nestjs/microservices";
+import { IPersonaCuenta } from "./dominio/model/interfaces/persona.domain.interface.usuario";
 
 @Controller()
 export class EventoController {
@@ -7,7 +8,7 @@ export class EventoController {
     constructor() {}
 
     @EventPattern('usuario.persona.registrada')
-    personaCreada(@Payload() data: any) {
+    personaCreada(@Payload() data: {data:IPersonaCuenta}) {
         console.log('Persona registrada',data);
     }
 

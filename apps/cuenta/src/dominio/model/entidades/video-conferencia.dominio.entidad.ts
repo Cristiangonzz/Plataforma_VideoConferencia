@@ -10,5 +10,17 @@ export class VideoConferenciaDomainEntity implements IVideoConferencia {
     pizzarra: false;
     compartirArchivo: false;
     presentacion: false;
-       
+
+    constructor(_dato?: IVideoConferencia) {
+
+        if (_dato?.url)
+            this.url= _dato.url;
+
+        if (_dato?.anfitrion)
+            this.anfitrion = _dato.anfitrion;
+
+        if (_dato?.participantes)
+            this.participantes = _dato.participantes;
+
+    }
 }

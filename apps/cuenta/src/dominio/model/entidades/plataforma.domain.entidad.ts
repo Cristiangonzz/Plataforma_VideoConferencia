@@ -1,13 +1,27 @@
-import { IEmpresaCuenta } from '../interfaces/empresa.dominio.interface.usuario';
-import { IPersonaCuenta } from '../interfaces/persona.domain.interface.usuario';
 import { IPlataforma } from '../interfaces/plataforma.dominio.interfaces';
 import { IVideoConferencia } from '../interfaces/video-conferencia.dominio.interfaces';
 
 export class PlataformaDomainEntity implements IPlataforma {
    
     url: string;
-    persona: IPersonaCuenta[];
-    empresa: IEmpresaCuenta[];
+    persona: string[];
+    empresa: string[];
     conferencia: IVideoConferencia[];
+
+    constructor(_dato?: IPlataforma) {
+
+        if (_dato?.url)
+            this.url= _dato.url;
+
+        if (_dato?.persona)
+            this.persona = _dato.persona;
+
+        if (_dato?.empresa)
+            this.empresa = _dato.empresa;
+
+        if (_dato?.conferencia)
+        this.conferencia = _dato.conferencia;
+
+    }
    
 }

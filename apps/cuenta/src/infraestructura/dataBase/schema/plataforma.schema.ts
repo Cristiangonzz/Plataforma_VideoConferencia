@@ -5,6 +5,7 @@ import { IPersonaCuenta } from '../../../dominio/model/interfaces/persona.domain
 import { IEmpresaCuenta } from '../../../dominio/model/interfaces/empresa.dominio.interface.usuario';
 import { IVideoConferencia } from 'apps/cuenta/src/dominio/model/interfaces/video-conferencia.dominio.interfaces';
 import { VideoconferenciaFactory, videoConferenciaSchema } from './video-conferencia.schema';
+import { EmpresaSchema, EmpresaSchemaFactory } from 'apps/usuario/src/infrastructura/dataBase/schema/empresa.shema';
 
 
 @Schema({collection: 'Plataforma',versionKey: false})
@@ -15,28 +16,18 @@ export class PlataformaSchema extends PlataformaDomainEntity {
   url: string;
 
   @Prop({
-    type: [{ 
-      nombre: String,
-      mail: String,
-      clave: String 
-    }],
+    type: [String],
     index: true,
   })
-  persona: IPersonaCuenta[];
+  persona: string[];
 
   
-  @Prop({
-    type: [{ 
-      nombre: String,
-      mail: String,
-      clave: String,
-      cantidadEmpleado: Number,
-      rut:Number,
-      rubro: String
-    }],
-    index: true,
-  })
-  empresa: IEmpresaCuenta[];
+   @Prop({
+     type: [String],
+     index: true,
+   })
+   empresa: string[];
+
 
   @Prop({
     type: [{ type: VideoconferenciaFactory, ref: videoConferenciaSchema.name}],
