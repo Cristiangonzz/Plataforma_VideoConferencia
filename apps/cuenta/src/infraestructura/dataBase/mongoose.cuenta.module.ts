@@ -5,6 +5,9 @@ import { VideoConferenciaMongoService } from './services/video-conferencia.servi
 import { VideoConferenciaRepository } from './repository/video-conferencia.repositoy';
 import { ConfigService } from '@nestjs/config';
 import { VideoconferenciaFactory, videoConferenciaSchema } from './schema/video-conferencia.schema';
+import { AudioConferenciaSchema, AudioconferenciaFactory } from './schema/audio-conferencia.schema';
+import { AudioConferenciaMongoService } from './services/audio-conferencia.service.mongo copy';
+import { AudioConferenciaRepository } from './repository/audio-conferencia.repositoy';
 
 @Module({
   imports: [
@@ -13,7 +16,8 @@ import { VideoconferenciaFactory, videoConferenciaSchema } from './schema/video-
     }),
 
     MongooseModule.forFeature([
-      {name:videoConferenciaSchema.name , schema:VideoconferenciaFactory} 
+      {name:videoConferenciaSchema.name , schema:VideoconferenciaFactory} ,
+      {name:AudioConferenciaSchema.name , schema:AudioconferenciaFactory} ,
     ])
   ],
   controllers: [],
@@ -23,14 +27,20 @@ import { VideoconferenciaFactory, videoConferenciaSchema } from './schema/video-
 
     
     VideoConferenciaMongoService,
+    AudioConferenciaMongoService,
 
+
+    AudioConferenciaRepository,
     VideoConferenciaRepository,
+
   ],
   exports: [
     ConfigService,
     MongooseModule,
     MongooseConfigService,
 
+    AudioConferenciaMongoService,
+    AudioConferenciaRepository,
     
     VideoConferenciaMongoService,
 

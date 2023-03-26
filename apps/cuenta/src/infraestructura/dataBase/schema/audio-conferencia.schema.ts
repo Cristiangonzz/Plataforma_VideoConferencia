@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 import { AudioConferenciaDomainEntity } from 'apps/cuenta/src/dominio/model/entidades/audio-conferencia.dominio.entidad';
 
 
-@Schema({collection: 'VideoConferencia',versionKey: false})
+@Schema({collection: 'AudioConferencia',versionKey: false})
 export class AudioConferenciaSchema extends AudioConferenciaDomainEntity {
 
    
