@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { CuentaService } from './infraestructura/services/plataforma.service';
+import { AudioConferenciaService } from './infraestructura/services/audio-conferencia.service';
 import { EventoController } from './evento.controller';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { MongoModuleCuenta } from './infraestructura/dataBase/mongoose.cuenta.module';
 import { MensajeriaModuleCuenta } from './infraestructura/menssaging/mensajeria.cuenta.module';
+import { VideoConferenciaService } from './infraestructura/services/video-conferencia.service';
 
 @Module({
   imports: [
@@ -20,6 +21,12 @@ import { MensajeriaModuleCuenta } from './infraestructura/menssaging/mensajeria.
       }),
   ],
   controllers: [EventoController],
-  providers: [CuentaService],
+  providers: [
+    ConfigService,
+    AudioConferenciaService,
+    VideoConferenciaService,
+
+  
+  ],
 })
 export class CuentaModule {}
