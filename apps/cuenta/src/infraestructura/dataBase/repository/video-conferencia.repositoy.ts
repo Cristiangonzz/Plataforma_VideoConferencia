@@ -4,20 +4,20 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Observable, catchError, from, map } from "rxjs";
 import { ICuentaRepository } from '../../../dominio/repositorios/cuenta-conferencia.repositorio';
-import { videoConferenciaSchema, videoConferenciaDocument } from '../schema/video-conferencia.schema';
+import { VideoConferenciaSchema, videoConferenciaDocument } from '../schema/video-conferencia.schema';
 
 @Injectable()
-export class VideoConferenciaRepository implements ICuentaRepository<videoConferenciaSchema>{
+export class VideoConferenciaRepository implements ICuentaRepository<VideoConferenciaSchema>{
     
     constructor(
-        @InjectModel(videoConferenciaSchema.name) private readonly videoConferenciaModel: Model<videoConferenciaDocument>
+        @InjectModel(VideoConferenciaSchema.name) private readonly videoConferenciaModel: Model<videoConferenciaDocument>
         ) { }
     
-    registar(dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
+    registar(dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
         return from(this.videoConferenciaModel.create(dato));
     }
     
-    findAll(): Observable<videoConferenciaSchema[]> {
+    findAll(): Observable<VideoConferenciaSchema[]> {
         return from(this.videoConferenciaModel.find()) 
             .pipe(
                 map((dato: videoConferenciaDocument[] ) =>  {
@@ -25,7 +25,7 @@ export class VideoConferenciaRepository implements ICuentaRepository<videoConfer
                 } ));
     }
 
-    findOneBy(id: string): Observable<videoConferenciaSchema> {
+    findOneBy(id: string): Observable<VideoConferenciaSchema> {
         return from(this.videoConferenciaModel.findById(id))
             .pipe(
                 catchError((err:Error) => {
@@ -34,7 +34,7 @@ export class VideoConferenciaRepository implements ICuentaRepository<videoConfer
             ));
     }
 
-    actualizar(id:string ,dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
+    actualizar(id:string ,dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
         return from(this.videoConferenciaModel.findByIdAndUpdate(id, dato, {new: true}))
             .pipe(
                  catchError((err : Error) => {
@@ -44,7 +44,7 @@ export class VideoConferenciaRepository implements ICuentaRepository<videoConfer
 
     }
 
-    eliminar(id: string): Observable<videoConferenciaSchema> {
+    eliminar(id: string): Observable<VideoConferenciaSchema> {
         return from(this.videoConferenciaModel.findByIdAndDelete(id))
         .pipe(
             catchError((err:Error) => {

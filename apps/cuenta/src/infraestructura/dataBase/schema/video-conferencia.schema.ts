@@ -4,7 +4,7 @@ import { VideoConferenciaDomainEntity } from '../../../dominio/model/entidades/v
 
 
 @Schema({collection: 'VideoConferencia',versionKey: false})
-export class videoConferenciaSchema extends VideoConferenciaDomainEntity {
+export class VideoConferenciaSchema extends VideoConferenciaDomainEntity {
 
 
     @Prop({
@@ -18,47 +18,45 @@ export class videoConferenciaSchema extends VideoConferenciaDomainEntity {
     @Prop({
         type: Boolean,
         index: true,
-        required: true,
-    })
-    chatVivo: true;
-    @Prop({
-        type: Boolean,
-        index: true,
-        required: true,
-       
-    })
-    grabacion?: false;
-    @Prop({
-        type: Boolean,
-        index: true,
-        required: true,
       
     })
-    pizzarra: false;
-    @Prop({
-        type: Boolean,
-        index: true,
-        required: true,
-        
-    })
-    compartirArchivo?: false;
+    chatVivo: boolean;
 
     @Prop({
         type: Boolean,
         index: true,
-        required: true,
+       
+    })
+    grabacion: boolean;
+
+    @Prop({
+        type: Boolean,
+        index: true,
+      
+      
+    })
+    pizzarra: boolean;
+    @Prop({
+        type: Boolean,
+        index: true,
+        
         
     })
-    presentacion?: false;
+    compartirArchivo: boolean;
+
+    @Prop({
+        type: Boolean,
+        index: true,
+    })
+    presentacion: boolean;
   
 
 
     @Prop({
         type: [String],
         index: true,
-        required: true,
       })
-    participantes?: string[];
+    participante: string[];
     
   
 }
@@ -67,6 +65,6 @@ export class videoConferenciaSchema extends VideoConferenciaDomainEntity {
  * define la forma en que los documentos deben ser organizados dentro de una colección.
  * hidrata el esquema ya definido de nodejs y mongoose para que sea como un documento de mongoDB
  */
-export type videoConferenciaDocument = HydratedDocument<videoConferenciaSchema>;
+export type videoConferenciaDocument = HydratedDocument<VideoConferenciaSchema>;
 
-export const VideoconferenciaFactory = SchemaFactory.createForClass(videoConferenciaSchema);
+export const VideoconferenciaFactory = SchemaFactory.createForClass(VideoConferenciaSchema);

@@ -22,7 +22,7 @@ export class CrearVideoConferenciaUseCase {
                     const newVideoConferencia = new VideoConferenciaDomainEntity();
 
                     newVideoConferencia.anfitrion = dato.anfitrion;
-                    newVideoConferencia.participantes = [""];
+                    newVideoConferencia.participante = [""];
                     newVideoConferencia.chatVivo = true;
                     newVideoConferencia.grabacion = false;
                     newVideoConferencia.pizzarra = false;

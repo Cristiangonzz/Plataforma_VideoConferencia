@@ -1,20 +1,20 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { ClientProxy } from "@nestjs/microservices";
-import { Observable } from "rxjs";
+ import { Inject, Injectable } from "@nestjs/common";
+ import { ClientProxy } from "@nestjs/microservices";
+ import { Observable } from "rxjs";
 
-import { IVideoConferencia } from '../../../../dominio/model/interfaces/video-conferencia.dominio.interfaces';
+ import { IVideoConferencia } from '../../../../dominio/model/interfaces/video-conferencia.dominio.interfaces';
 
 
-@Injectable()
-export class VideoConferenciaCreadaPublisher {
+ @Injectable()
+ export class VideoConferenciaCreadaPublisher {
 
-    constructor(
-        @Inject('CUENTA_SERVICE') private readonly clienProxy: ClientProxy,
-    ) { }
+     constructor(
+         @Inject('USUARIO_SERVICE') private readonly clienProxy: ClientProxy,
+     ) { }
 
-    publish(data:IVideoConferencia) : Observable<IVideoConferencia> {
-        return this.clienProxy.emit( 'cuenta.videoConferencia.creada',
-            JSON.stringify({ data})
-        )
-    }
-}
+     publish(data:IVideoConferencia) : Observable<IVideoConferencia> {
+         return this.clienProxy.emit( 'cuenta.videoConferencia.creada',
+             JSON.stringify({ data})
+         )
+     }
+ }

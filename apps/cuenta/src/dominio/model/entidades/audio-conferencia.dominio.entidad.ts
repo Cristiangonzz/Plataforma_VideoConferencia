@@ -2,16 +2,13 @@ import { IAudioConferencia } from '../interfaces/audio-conferencia.dominio.inter
 
 export class AudioConferenciaDomainEntity implements IAudioConferencia {
    
-    url: string;
     anfitrion: string;
     participantes: string[];
-    audio: true;
-  
+    audio: boolean;
 
     constructor(_dato?: IAudioConferencia) {
 
-        if (_dato?.url)
-            this.url= _dato.url;
+      
 
         if (_dato?.anfitrion)
             this.anfitrion = _dato.anfitrion;

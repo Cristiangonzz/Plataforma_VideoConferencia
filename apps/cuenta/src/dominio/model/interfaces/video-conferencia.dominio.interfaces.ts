@@ -1,6 +1,6 @@
 export interface IVideoConferencia {
   anfitrion: string;
-  participantes?: string[];
+  participante?: string[];
   chatVivo?:boolean;
   grabacion?:boolean;  
   pizzarra?:boolean;  

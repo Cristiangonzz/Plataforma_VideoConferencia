@@ -1,29 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { IVideoConferenciaDomainService } from '../../../dominio/services/video-conferencia.service';
-import { videoConferenciaSchema } from '../schema/video-conferencia.schema';
+import { VideoConferenciaSchema } from '../schema/video-conferencia.schema';
 import { VideoConferenciaRepository } from '../repository/video-conferencia.repositoy';
 
 @Injectable()
 export class VideoConferenciaMongoService
-  implements IVideoConferenciaDomainService<videoConferenciaSchema>
+  implements IVideoConferenciaDomainService<VideoConferenciaSchema>
 {
  
   constructor(private readonly videoConferenciaRepository: VideoConferenciaRepository) {}
 
-    crearVideoConferencia(dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
+    crearVideoConferencia(dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
         return this.videoConferenciaRepository.registar(dato);
     }
-    findAll(): Observable<videoConferenciaSchema[]> {
+    findAll(): Observable<VideoConferenciaSchema[]> {
         return this.videoConferenciaRepository.findAll();
     }
-    findOneBy(id: string): Observable<videoConferenciaSchema> {
+    findOneBy(id: string): Observable<VideoConferenciaSchema> {
         return this.videoConferenciaRepository.findOneBy(id);
     }
-    ActualizarVideoConferencia(id: string, dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
+    ActualizarVideoConferencia(id: string, dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
        return this.videoConferenciaRepository.actualizar(id, dato);
     }
-    eliminarVideoConferencia(id: string): Observable<videoConferenciaSchema> {
+    eliminarVideoConferencia(id: string): Observable<VideoConferenciaSchema> {
         return this.videoConferenciaRepository.eliminar(id);
     }
 

@@ -20,10 +20,11 @@ export class CrearAudioConferenciaUseCase {
                     }
                     
                     const newAudioConferencia = new AudioConferenciaDomainEntity();
-                    newAudioConferencia.url = dato.url;
+    
                     newAudioConferencia.anfitrion = dato.anfitrion;
-                    newAudioConferencia.participantes = dato.participantes;
-
+                    newAudioConferencia.participantes = [""];
+                    newAudioConferencia.audio = true;
+                    
                     return of(newAudioConferencia);
                 }),
                 mergeMap((AudioConferencia:AudioConferenciaDomainEntity) => {

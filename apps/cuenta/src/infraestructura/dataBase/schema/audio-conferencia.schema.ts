@@ -7,13 +7,6 @@ import { AudioConferenciaDomainEntity } from 'apps/cuenta/src/dominio/model/enti
 export class AudioConferenciaSchema extends AudioConferenciaDomainEntity {
 
    
-    @Prop({
-        type: String,
-        index: true,
-        unique: true,
-        required: true,
-    })
-    url: string;
 
     @Prop({
         type: String,
@@ -27,7 +20,7 @@ export class AudioConferenciaSchema extends AudioConferenciaDomainEntity {
         type: Boolean,
         index: true,
     })
-    audio: true;
+    audio: boolean;
 
 
     @Prop({
