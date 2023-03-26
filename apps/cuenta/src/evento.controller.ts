@@ -5,7 +5,9 @@ import { IPersonaCuenta } from "./dominio/model/interfaces/persona.domain.interf
 @Controller()
 export class EventoController {
 
-    constructor() {}
+    constructor() {
+        
+    }
 
     @EventPattern('usuario.persona.registrada')
     personaCreada(@Payload() data: {data:IPersonaCuenta}) {

@@ -1,5 +1,11 @@
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
+import { AudioConferenciaActualizadaPublisher } from "./publisher/video-conferencia/audio-conferencia-actualizada.publisher";
+import { VideoConferenciaCreadaPublisher } from "./publisher/video-conferencia/video-conferencia-creada.publisher";
+import { VideoConferenciaBuscadaPublisher } from "./publisher/video-conferencia/video-conferencia-buscada.publisher";
+import { VideoConferenciaActualizadaPublisher } from "./publisher/video-conferencia/video-conferencia-actualizada.publisher";
+import { AudioConferenciaBuscadaPublisher } from "./publisher/video-conferencia/audio-conferencia-buscada.publisher";
+import { AudioConferenciaCreadaPublisher } from "./publisher/video-conferencia/audio-conferencia-creada.publisher";
 @Module({
     imports: [
         ClientsModule.register([
@@ -18,18 +24,24 @@ import { ClientsModule, Transport } from "@nestjs/microservices";
     ],
     controllers: [],
     providers: [
-      // PersonaRegistradaPublisher,
-      // PersonaBuscadaPublisher,
 
-      // EmpresaRegistradaPublisher,
-      // EmpresaBuscadaPublisher,
+      VideoConferenciaCreadaPublisher ,
+      VideoConferenciaBuscadaPublisher,
+      VideoConferenciaActualizadaPublisher,
+
+      AudioConferenciaActualizadaPublisher ,
+      AudioConferenciaBuscadaPublisher ,
+      AudioConferenciaCreadaPublisher,
+      
     ],
     exports: [
-      // EmpresaRegistradaPublisher,
-      // EmpresaBuscadaPublisher,
+      VideoConferenciaCreadaPublisher ,
+      VideoConferenciaBuscadaPublisher,
+      VideoConferenciaActualizadaPublisher,
       
-      // PersonaRegistradaPublisher,
-      // PersonaBuscadaPublisher
+      AudioConferenciaActualizadaPublisher ,
+      AudioConferenciaBuscadaPublisher ,
+      AudioConferenciaCreadaPublisher,
     ],
   })
   export class MensajeriaModuleCuenta {}

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import {  RegistrarPersonaDto } from '../dto/registrar-persona.dto';
 import { PersonaService } from '../service/persona.service';
 import { PersonaRegistradaPublisher } from '../messanging/publisher/persona/persona-registrado.publisher';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import { PersonaSchema } from '../dataBase/schema/persona.shema';
 import { PersonaDomainEntity } from '../../dominio/model/persona';
 import { BuscarMail } from '../dto/buscar-mail..dto';
@@ -36,8 +36,13 @@ export class PersonaController {
      buscarPersona(@Body() id: BuscarMail ):Observable<PersonaDomainEntity>{
         const caso = new BuscarPersonaUseCase(this.personaService);
         
-        return caso.execute(id).pipe(tap((data: PersonaDomainEntity) =>{
+        return caso.execute(id.mail).pipe(tap((data: PersonaDomainEntity) =>{
             this.personaBuscadaPublisher.publish(data);
-        }))
+        }),
+        catchError((error) => {
+            // Manejo de errores
+            console.error('Se produjo un error al buscar la persona', error);
+            throw new Error('No se pudo buscar la persona');
+          }));
      }
 }

@@ -6,14 +6,6 @@ import { VideoConferenciaDomainEntity } from '../../../dominio/model/entidades/v
 @Schema({collection: 'VideoConferencia',versionKey: false})
 export class videoConferenciaSchema extends VideoConferenciaDomainEntity {
 
-   
-    @Prop({
-        type: String,
-        index: true,
-        unique: true,
-        required: true,
-    })
-    url: string;
 
     @Prop({
         type: String,
@@ -26,41 +18,47 @@ export class videoConferenciaSchema extends VideoConferenciaDomainEntity {
     @Prop({
         type: Boolean,
         index: true,
+        required: true,
     })
     chatVivo: true;
     @Prop({
         type: Boolean,
         index: true,
+        required: true,
        
     })
-    grabacion: false;
+    grabacion?: false;
     @Prop({
         type: Boolean,
         index: true,
+        required: true,
       
     })
     pizzarra: false;
     @Prop({
         type: Boolean,
         index: true,
+        required: true,
         
     })
-    compartirArchivo: false;
+    compartirArchivo?: false;
 
     @Prop({
         type: Boolean,
         index: true,
+        required: true,
         
     })
-    presentacion: false;
+    presentacion?: false;
   
 
 
     @Prop({
         type: [String],
         index: true,
+        required: true,
       })
-    participantes: string[];
+    participantes?: string[];
     
   
 }

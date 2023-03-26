@@ -20,8 +20,8 @@ export class PersonaMongoService
     findOneBy(id: string): Observable<PersonaSchema> {
         return this.personaRepository.findOneBy(id);
     }
-    Actualizar(id: string, perosna: PersonaSchema): Observable<PersonaSchema> {
-       return this.personaRepository.actualizar(id, perosna);
+    Actualizar(id: string, persona: PersonaSchema): Observable<PersonaSchema> {
+       return this.personaRepository.actualizar(id, persona);
     }
     eliminar(id: string): Observable<PersonaSchema> {
         return this.personaRepository.eliminar(id);

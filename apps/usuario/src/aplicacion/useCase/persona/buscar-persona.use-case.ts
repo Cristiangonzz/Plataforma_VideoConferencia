@@ -1,24 +1,22 @@
-import { Observable } from "rxjs";
+import { Observable, catchError, mergeMap, of, throwIfEmpty } from "rxjs";
 import { PersonaDomainEntity } from "../../../dominio/model/persona";
 import { IPersonaDomainService } from "../../../dominio/services/persona.domain.service";
-import { BuscarMail } from '../../../infrastructura/dto/buscar-mail..dto';
-import { validateSync } from "class-validator";
-
 
 
 export class BuscarPersonaUseCase {  
   
     constructor(private readonly usuarioService: IPersonaDomainService<PersonaDomainEntity>) { }
 
-    execute(dato: BuscarMail): Observable<PersonaDomainEntity> {
-
-        const errors = validateSync(dato);
-
-        if (errors.length > 0) {
-            throw new Error('Mail de persona incorrecto');
-        }
-        
-
-        return this.usuarioService.findOneBy(dato.mail); 
+    execute(dato: string): Observable<PersonaDomainEntity> {
+       
+        return of(dato).pipe(
+            throwIfEmpty(() => new Error('Dato requerido')),
+            mergeMap((datoValidado :string) => {
+                return this.usuarioService.findOneBy(datoValidado);
+            }),
+            catchError((err : Error) => {
+                throw new Error('No se encontró la persona');
+            })
+        );
     }
 }

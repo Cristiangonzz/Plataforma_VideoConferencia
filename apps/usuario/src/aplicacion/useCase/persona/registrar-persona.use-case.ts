@@ -1,33 +1,36 @@
-import { Observable } from "rxjs";
-import { createHash } from "crypto";
+import { Observable, catchError, from, mergeMap, of } from "rxjs";
 import { PersonaDomainEntity } from '../../../dominio/model/persona';
 import { IPersonaDomainService } from "../../../dominio/services/persona.domain.service";
-import { RegistrarPersonaDto } from '../../../infrastructura/dto/registrar-persona.dto';
-import { validateSync } from 'class-validator';
+import { IDatosBasicosModel } from '../../../dominio/model/interface/datos-basicos.interface';
+import { ValidationError, validate } from "class-validator";
 
 
 export class RegistrarPersonaoUseCase {  
   
     constructor(private readonly usuarioService: IPersonaDomainService<PersonaDomainEntity>) { }
 
-        execute(dato: RegistrarPersonaDto): Observable<PersonaDomainEntity> {
+        execute(dato: IDatosBasicosModel): Observable<PersonaDomainEntity> {
 
-        const errors = validateSync(dato);
+            const observable = from(validate(dato));
 
-        if (errors.length > 0) {
-            throw new Error('Datos incorrectos');
-        }
-
-        dato.clave = createHash('sha512')
-        .update(dato.clave)
-        .digest('hex');
-
-        const newPersona = new PersonaDomainEntity();
-        newPersona.mail = dato.mail;
-        newPersona.clave = dato.clave;
-        newPersona.nombre = dato.nombre;
-        
-
-        return this.usuarioService.registar(newPersona); 
+            return observable.pipe(
+                mergeMap((errors : ValidationError[]) => {
+                    if (errors.length > 0) {
+                        throw new Error('Datos incorrectos');
+                    }
+    
+                    const newPersona = new PersonaDomainEntity();
+                    newPersona.mail = dato.mail;
+                    newPersona.nombre = dato.nombre;
+                    newPersona.setPassword(dato.clave);
+                    return of(newPersona);
+                }),
+                mergeMap((persona:PersonaDomainEntity) => {
+                    return this.usuarioService.registar(persona);
+                }),
+                catchError((error:Error) => {
+                    throw new Error(error.message);
+                }));
+         
     }
 }

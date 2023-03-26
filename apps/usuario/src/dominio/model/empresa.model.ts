@@ -1,3 +1,4 @@
+import { createHash } from "crypto";
 import { IDatosBasicosModel } from "./interface/datos-basicos.interface";
 import { IEmpresaDomainModel } from "./interface/empresa.interface";
 
@@ -34,4 +35,10 @@ export class EmpresaDomainEntity implements IDatosBasicosModel , IEmpresaDomainM
 
 
     }
+
+    public setPassword(clave: string): void {
+        const hash = createHash('sha256');
+        hash.update(clave);
+        this.clave = hash.digest('hex');
+      }
 }

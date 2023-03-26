@@ -6,6 +6,10 @@ import { join } from 'path';
 import { MongoModuleCuenta } from './infraestructura/dataBase/mongoose.cuenta.module';
 import { MensajeriaModuleCuenta } from './infraestructura/menssaging/mensajeria.cuenta.module';
 import { VideoConferenciaService } from './infraestructura/services/video-conferencia.service';
+import { AudioConferenciaRepository } from './infraestructura/dataBase/repository/audio-conferencia.repositoy';
+import { VideoConferenciaRepository } from './infraestructura/dataBase/repository/video-conferencia.repositoy';
+import { VideoConferenciaController } from './infraestructura/controllers/video-conferencia.controller';
+import { AudioConferenciaController } from './infraestructura/controllers/audio-conferencia.controller';
 
 @Module({
   imports: [
@@ -20,11 +24,18 @@ import { VideoConferenciaService } from './infraestructura/services/video-confer
         ),
       }),
   ],
-  controllers: [EventoController],
+  controllers: [
+    EventoController,
+    VideoConferenciaController,
+    AudioConferenciaController,
+  ],
   providers: [
     ConfigService,
     AudioConferenciaService,
     VideoConferenciaService,
+
+    AudioConferenciaRepository,
+    VideoConferenciaRepository,
 
   
   ],

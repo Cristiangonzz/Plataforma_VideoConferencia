@@ -2,7 +2,7 @@ import { EmpresaRegistradaPublisher } from "../messanging/publisher/empresa/empr
 import { EmpresaService } from '../service/empresa.service';
 import { EmpresaBuscadaPublisher } from '../messanging/publisher/empresa/empresa-buscada.publisher';
 import { Body, Controller, Get, Post } from "@nestjs/common";
-import { Observable, tap } from "rxjs";
+import { Observable, catchError, tap } from "rxjs";
 import { EmpresaDomainEntity } from "../../dominio/model/empresa.model";
 import { BuscarMail } from "../dto/buscar-mail..dto";
 import { RegistrarEmpresaDto } from "../dto/registrar-empresa.dto";
@@ -35,10 +35,14 @@ export class EmpresaController {
      buscarEmpresa(@Body() id: BuscarMail ):Observable<EmpresaDomainEntity>{
         const caso = new BuscarEmpresaUseCase(this.empresaService);
         
-        return caso.execute(id).pipe(tap((data: EmpresaDomainEntity) =>{
+        return caso.execute(id.mail).pipe(tap((data: EmpresaDomainEntity) =>{
             this.empresaBuscadaPublisher.publish(data);
-        },(error:Error) => {
-            console.log(error);
-        }));
+        },
+        catchError((error) => {
+            // Manejo de errores
+            console.error('Se produjo un error al buscar la persona', error);
+            throw new Error('No se pudo buscar la persona');
+       
+        })));
      }
 }

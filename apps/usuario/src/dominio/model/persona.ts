@@ -1,3 +1,4 @@
+import { createHash } from 'crypto';
 import { IDatosBasicosModel } from './interface/datos-basicos.interface';
 
 export class PersonaDomainEntity  implements IDatosBasicosModel{
@@ -16,5 +17,11 @@ export class PersonaDomainEntity  implements IDatosBasicosModel{
 
     if (_dato?.clave)
         this.clave = _dato.clave;
+  }
+
+  public setPassword(clave: string): void {
+    const hash = createHash('sha256');
+    hash.update(clave);
+    this.clave = hash.digest('hex');
   }
 }

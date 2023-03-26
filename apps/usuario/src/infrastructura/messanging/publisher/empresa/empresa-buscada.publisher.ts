@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { IDatosBasicosModel } from 'apps/usuario/src/dominio/model/interface/datos-basicos.interface';
 import { RegistrarEmpresaDto } from '../../../dto/registrar-empresa.dto';
 import { Observable } from 'rxjs';
 

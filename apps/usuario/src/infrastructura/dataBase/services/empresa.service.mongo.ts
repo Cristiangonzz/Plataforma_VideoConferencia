@@ -12,8 +12,8 @@ export class EmpresaMongoService
  
   constructor(private readonly empresaRepository: EmpresaRepository) {}
 
-    registar(persona: EmpresaSchema): Observable<EmpresaSchema> {
-        return this.empresaRepository.registar(persona);
+    registar(empresa: EmpresaSchema): Observable<EmpresaSchema> {
+        return this.empresaRepository.registar(empresa);
     }
     findAll(): Observable<EmpresaSchema[]> {
         return this.empresaRepository.findAll();
@@ -21,8 +21,8 @@ export class EmpresaMongoService
     findOneBy(id: string): Observable<EmpresaSchema> {
         return this.empresaRepository.findOneBy(id);
     }
-    Actualizar(id: string, perosna: EmpresaSchema): Observable<EmpresaSchema> {
-       return this.empresaRepository.actualizar(id, perosna);
+    Actualizar(id: string, empresa: EmpresaSchema): Observable<EmpresaSchema> {
+       return this.empresaRepository.actualizar(id, empresa);
     }
     eliminar(id: string): Observable<EmpresaSchema> {
         return this.empresaRepository.eliminar(id);

@@ -11,7 +11,7 @@ export class VideoConferenciaMongoService
  
   constructor(private readonly videoConferenciaRepository: VideoConferenciaRepository) {}
 
-    registar(dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
+    crearVideoConferencia(dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
         return this.videoConferenciaRepository.registar(dato);
     }
     findAll(): Observable<videoConferenciaSchema[]> {
@@ -20,10 +20,10 @@ export class VideoConferenciaMongoService
     findOneBy(id: string): Observable<videoConferenciaSchema> {
         return this.videoConferenciaRepository.findOneBy(id);
     }
-    Actualizar(id: string, dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
+    ActualizarVideoConferencia(id: string, dato: videoConferenciaSchema): Observable<videoConferenciaSchema> {
        return this.videoConferenciaRepository.actualizar(id, dato);
     }
-    eliminar(id: string): Observable<videoConferenciaSchema> {
+    eliminarVideoConferencia(id: string): Observable<videoConferenciaSchema> {
         return this.videoConferenciaRepository.eliminar(id);
     }
 

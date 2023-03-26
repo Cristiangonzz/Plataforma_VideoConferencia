@@ -11,7 +11,7 @@ export class AudioConferenciaMongoService
  
   constructor(private readonly audioConferenciaRepository: AudioConferenciaRepository) {}
 
-    registar(dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
+    crearAudioConferencia(dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
         return this.audioConferenciaRepository.registar(dato);
     }
     findAll(): Observable<AudioConferenciaSchema[]> {
@@ -20,10 +20,10 @@ export class AudioConferenciaMongoService
     findOneBy(id: string): Observable<AudioConferenciaSchema> {
         return this.audioConferenciaRepository.findOneBy(id);
     }
-    Actualizar(id: string, dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
+    ActualizarAudioConferencia(id: string, dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
        return this.audioConferenciaRepository.actualizar(id, dato);
     }
-    eliminar(id: string): Observable<AudioConferenciaSchema> {
+    eliminarAudioConferencia(id: string): Observable<AudioConferenciaSchema> {
         return this.audioConferenciaRepository.eliminar(id);
     }
 
