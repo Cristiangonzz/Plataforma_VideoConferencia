@@ -2,11 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from './config/mongoose.config';
 import { VideoConferenciaMongoService } from './services/video-conferencia.service.mongo';
-import { PlataformaRepository } from './repository/plataforma.repository';
 import { VideoConferenciaRepository } from './repository/video-conferencia.repositoy';
-import { PlataformaMongoService } from './services/plataforma.service.mongo';
 import { ConfigService } from '@nestjs/config';
-import { PlataformaSchema, PlataformaSchemaFactory } from './schema/plataforma.schema';
 import { VideoconferenciaFactory, videoConferenciaSchema } from './schema/video-conferencia.schema';
 
 @Module({
@@ -16,7 +13,6 @@ import { VideoconferenciaFactory, videoConferenciaSchema } from './schema/video-
     }),
 
     MongooseModule.forFeature([
-      {name:PlataformaSchema.name , schema:PlataformaSchemaFactory},
       {name:videoConferenciaSchema.name , schema:VideoconferenciaFactory} 
     ])
   ],
@@ -25,10 +21,9 @@ import { VideoconferenciaFactory, videoConferenciaSchema } from './schema/video-
     MongooseConfigService,
     ConfigService,
 
-    PlataformaMongoService,
+    
     VideoConferenciaMongoService,
 
-    PlataformaRepository,
     VideoConferenciaRepository,
   ],
   exports: [
@@ -36,10 +31,9 @@ import { VideoconferenciaFactory, videoConferenciaSchema } from './schema/video-
     MongooseModule,
     MongooseConfigService,
 
-    PlataformaMongoService,
+    
     VideoConferenciaMongoService,
 
-    PlataformaRepository,
     VideoConferenciaRepository,
 
   ],

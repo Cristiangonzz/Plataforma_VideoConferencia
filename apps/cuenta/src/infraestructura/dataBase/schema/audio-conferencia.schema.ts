@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { VideoConferenciaDomainEntity } from '../../../dominio/model/entidades/video-conferencia.dominio.entidad';
+import { AudioConferenciaDomainEntity } from 'apps/cuenta/src/dominio/model/entidades/audio-conferencia.dominio.entidad';
 
 
 @Schema({collection: 'VideoConferencia',versionKey: false})
-export class videoConferenciaSchema extends VideoConferenciaDomainEntity {
+export class AudioConferenciaSchema extends AudioConferenciaDomainEntity {
 
    
     @Prop({
@@ -27,33 +27,7 @@ export class videoConferenciaSchema extends VideoConferenciaDomainEntity {
         type: Boolean,
         index: true,
     })
-    chatVivo: true;
-    @Prop({
-        type: Boolean,
-        index: true,
-       
-    })
-    grabacion: false;
-    @Prop({
-        type: Boolean,
-        index: true,
-      
-    })
-    pizzarra: false;
-    @Prop({
-        type: Boolean,
-        index: true,
-        
-    })
-    compartirArchivo: false;
-
-    @Prop({
-        type: Boolean,
-        index: true,
-        
-    })
-    presentacion: false;
-  
+    audio: true;
 
 
     @Prop({
@@ -69,6 +43,6 @@ export class videoConferenciaSchema extends VideoConferenciaDomainEntity {
  * define la forma en que los documentos deben ser organizados dentro de una colección.
  * hidrata el esquema ya definido de nodejs y mongoose para que sea como un documento de mongoDB
  */
-export type videoConferenciaDocument = HydratedDocument<videoConferenciaSchema>;
+export type AudioConferenciaDocument = HydratedDocument<AudioConferenciaSchema>;
 
-export const VideoconferenciaFactory = SchemaFactory.createForClass(videoConferenciaSchema);
+export const AudioconferenciaFactory = SchemaFactory.createForClass(AudioConferenciaSchema);
