@@ -9,7 +9,7 @@
  export class VideoConferenciaActualizadaPublisher {
 
      constructor(
-         @Inject('USUARIO_SERVICE') private readonly clienProxy: ClientProxy,
+         @Inject('CUENTA_SERVICE') private readonly clienProxy: ClientProxy,
      ) { }
 
      publish(data:IVideoConferencia) : Observable<IVideoConferencia> {

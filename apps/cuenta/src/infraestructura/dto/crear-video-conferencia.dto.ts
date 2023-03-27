@@ -1,8 +1,7 @@
-import { IsString } from "class-validator";
-import { VideoConferenciaSchema } from "../dataBase/schema/video-conferencia.schema";
+import {  IsEmail } from 'class-validator';
 
-export class CrearVideoConferenciaDTO extends VideoConferenciaSchema {	
+export class CrearVideoConferenciaDTO {	
 
-    @IsString()
+    @IsEmail()
     anfitrion: string;
 }

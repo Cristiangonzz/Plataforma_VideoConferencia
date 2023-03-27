@@ -4,6 +4,8 @@ import { PersonaRegistradaPublisher } from "./publisher/persona/persona-registra
 import { PersonaBuscadaPublisher } from "./publisher/persona/persona-buscada.oublisher";
 import { EmpresaBuscadaPublisher } from "./publisher/empresa/empresa-buscada.publisher";
 import { EmpresaRegistradaPublisher } from "./publisher/empresa/empresa-registrada.publisher";
+import { PersonaBuscadaVideoConferenciaPublisher } from "./publisher/cuenta/cuenta-video-conferencia/persona-buscada-video-conferencia.publisher";
+import { RespuestaVideoConferenciadaRegistradaPublisher } from "./publisher/cuenta/cuenta-video-conferencia/respuesta-crear-video-conferencia.publisher";
 @Module({
     imports: [
         ClientsModule.register([
@@ -12,7 +14,7 @@ import { EmpresaRegistradaPublisher } from "./publisher/empresa/empresa-registra
               transport: Transport.RMQ,
               options: {
                 urls: ['amqp://localhost:5672'],
-                queue: 'main_queue',
+                queue: 'usuario_queue',
                 queueOptions: {
                   durable: false
                 },
@@ -22,13 +24,23 @@ import { EmpresaRegistradaPublisher } from "./publisher/empresa/empresa-registra
     ],
     controllers: [],
     providers: [
+      //Usuario
       PersonaRegistradaPublisher,
       PersonaBuscadaPublisher,
 
       EmpresaRegistradaPublisher,
       EmpresaBuscadaPublisher,
+
+      //cuenta
+      PersonaBuscadaVideoConferenciaPublisher,
+      RespuestaVideoConferenciadaRegistradaPublisher,
     ],
     exports: [
+      //cuenta 
+      PersonaBuscadaVideoConferenciaPublisher,
+      RespuestaVideoConferenciadaRegistradaPublisher,
+
+      //usuario
       EmpresaRegistradaPublisher,
       EmpresaBuscadaPublisher,
       

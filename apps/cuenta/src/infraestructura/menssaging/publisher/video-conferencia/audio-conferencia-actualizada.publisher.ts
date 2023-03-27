@@ -9,7 +9,7 @@
  export class AudioConferenciaActualizadaPublisher {
 
      constructor(
-         @Inject('USUARIO_SERVICE') private readonly clienProxy: ClientProxy,
+         @Inject('CUENTA_SERVICE') private readonly clienProxy: ClientProxy,
      ) { }
 
      publish(data:IAudioConferencia) : Observable<IAudioConferencia> {

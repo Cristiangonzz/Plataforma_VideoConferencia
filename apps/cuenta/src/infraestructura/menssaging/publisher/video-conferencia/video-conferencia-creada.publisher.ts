@@ -1,20 +1,24 @@
  import { Inject, Injectable } from "@nestjs/common";
  import { ClientProxy } from "@nestjs/microservices";
- import { Observable } from "rxjs";
+ import { Observable, map, mergeMap, retry, tap } from "rxjs";
 
- import { IVideoConferencia } from '../../../../dominio/model/interfaces/video-conferencia.dominio.interfaces';
+ //import { IVideoConferencia } from '../../../../dominio/model/interfaces/video-conferencia.dominio.interfaces';
 
 
  @Injectable()
  export class VideoConferenciaCreadaPublisher {
 
      constructor(
-         @Inject('USUARIO_SERVICE') private readonly clienProxy: ClientProxy,
+         @Inject('CUENTA_SERVICE') private readonly clienProxy: ClientProxy,
      ) { }
 
-     publish(data:IVideoConferencia) : Observable<IVideoConferencia> {
-         return this.clienProxy.emit( 'cuenta.videoConferencia.creada',
-             JSON.stringify({ data})
-         )
-     }
- }
+     publisher(data: string): Observable<string> {
+        return this.clienProxy
+            .send('cuenta.videoConferencia.creada',data).pipe(
+                map((res : string) =>   res )
+                ,
+                retry(2)
+                );
+      }
+}
+ 

@@ -10,6 +10,7 @@ import { AudioConferenciaRepository } from './infraestructura/dataBase/repositor
 import { VideoConferenciaRepository } from './infraestructura/dataBase/repository/video-conferencia.repositoy';
 import { VideoConferenciaController } from './infraestructura/controllers/video-conferencia.controller';
 import { AudioConferenciaController } from './infraestructura/controllers/audio-conferencia.controller';
+import { EventoRespuestaUsuarioController } from './respuestas-evento-usuario.controller';
 
 @Module({
   imports: [
@@ -28,6 +29,8 @@ import { AudioConferenciaController } from './infraestructura/controllers/audio-
     EventoController,
     VideoConferenciaController,
     AudioConferenciaController,
+    //Respuesta de usuario
+    EventoRespuestaUsuarioController,
   ],
   providers: [
     ConfigService,

@@ -8,7 +8,7 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: ['amqp://localhost:5672'],
-      queue: 'main_queue',
+      queue: 'cuenta_queue',
       queueOptions: {
         durable: false
       },
@@ -16,6 +16,7 @@ async function bootstrap() {
   });
   
   await app.startAllMicroservices();
+  
   await app.listen(3000);
   console.log(`Application is running on: ${await app.getUrl()} - Usuario`);
 }

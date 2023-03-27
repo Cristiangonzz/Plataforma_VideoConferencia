@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
-import { Observable, from, tap } from "rxjs";
+import { Observable, from, map, switchMap, tap } from "rxjs";
 import { VideoConferenciaDomainEntity } from '../../dominio/model/entidades/video-conferencia.dominio.entidad';
 import { BuscarVideoConferenciaDto } from '../dto/buscar-video-conferencia.dto';
 import { VideoConferenciaService } from '../services/video-conferencia.service';
@@ -20,14 +20,24 @@ export class VideoConferenciaController {
     @Post('crear')
      crearVideoConferencia(@Body() dato: CrearVideoConferenciaDTO):Observable<VideoConferenciaDomainEntity> {
         const caso  = new  CrearVideoConferenciaUseCase(this.videoConferenciaService);
-        return from(caso.execute(dato))
+       return this.videoConferenciaRegistradaPublisher.publisher(dato.anfitrion)
         .pipe(
-            tap((videoconferencia:CrearVideoConferenciaDTO) => {
-                this.videoConferenciaRegistradaPublisher.publish(videoconferencia);
-            },
-            (error:Error) => {
-                console.log(error);
-            }));
+            switchMap(
+                value => {
+                    return  caso.execute({anfitrion:value});
+                }
+            )
+        )
+        
+      
+        // return from(caso.execute(dato))
+        // .pipe(
+        //     tap((videoconferencia:CrearVideoConferenciaDTO) => {
+        //         this.videoConferenciaRegistradaPublisher.publisher(videoconferencia.anfitrion);
+        //     },
+        //     (error:Error) => {
+        //         console.log(error);
+        //     }));
     }
 
      @Get('buscar')

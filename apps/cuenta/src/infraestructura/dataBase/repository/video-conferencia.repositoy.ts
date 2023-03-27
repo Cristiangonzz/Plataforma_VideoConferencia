@@ -14,6 +14,7 @@ export class VideoConferenciaRepository implements ICuentaRepository<VideoConfer
         ) { }
     
     registar(dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
+        console.log("Repo de videoConferencia",dato);
         return from(this.videoConferenciaModel.create(dato));
     }
     

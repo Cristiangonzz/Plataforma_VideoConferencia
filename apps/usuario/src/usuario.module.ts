@@ -9,6 +9,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { EmpresaController } from './infrastructura/controllers/empresa.controller';
 import { MensajeriaModule } from './infrastructura/messanging/mensajeria.module';
+import { EventoCuentaController } from './evento-cuenta.controller';
+import { BuscarPersonaUseCase } from './aplicacion/useCase/persona/buscar-persona.use-case';
 
 @Module({
   imports: [
@@ -23,8 +25,13 @@ import { MensajeriaModule } from './infrastructura/messanging/mensajeria.module'
          ),
        }),
   ],
-  controllers: [PersonaController, EmpresaController],
+  controllers: [
+    PersonaController,
+    EmpresaController,
+    EventoCuentaController
+    ],
   providers: [
+  
     ConfigService,
 
     PersonaService,

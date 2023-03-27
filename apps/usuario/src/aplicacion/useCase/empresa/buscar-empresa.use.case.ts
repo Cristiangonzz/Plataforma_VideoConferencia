@@ -10,14 +10,14 @@ export class BuscarEmpresaUseCase {
 
     execute(dato: string): Observable<EmpresaDomainEntity> {
 
-        return of(dato).pipe(
-            throwIfEmpty(() => new Error('Dato requerido')),
-            mergeMap((datoValidado :string) => {
-                return this.empresaService.findOneBy(datoValidado);
-            }),
-            catchError((err : Error) => {
-                throw new Error('No se encontró la Empresa');
-            })
-        );
+         return of(dato).pipe(
+             throwIfEmpty(() => new Error('Dato requerido')),
+             mergeMap((datoValidado :string) => {
+                 return this.empresaService.findOneBy(datoValidado);
+             }),
+             catchError((err : Error) => {
+                 throw new Error('No se encontró la Empresa');
+             })
+         );
     }
 }
