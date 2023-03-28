@@ -14,17 +14,9 @@ export class PersonaMongoService
     registar(persona: PersonaSchema): Observable<PersonaSchema> {
         return this.personaRepository.registar(persona);
     }
-    findAll(): Observable<PersonaSchema[]> {
-        return this.personaRepository.findAll();
-    }
     findOneBy(id: string): Observable<PersonaSchema> {
         return this.personaRepository.findOneBy(id);
     }
-    Actualizar(id: string, persona: PersonaSchema): Observable<PersonaSchema> {
-       return this.personaRepository.actualizar(id, persona);
-    }
-    eliminar(id: string): Observable<PersonaSchema> {
-        return this.personaRepository.eliminar(id);
-    }
+   
 
 }
