@@ -27,12 +27,4 @@ export class VideoConferenciaController {
             );
     }
 
-    //  @Get('buscar')
-    //  buscarVideoConferencia(@Body() id: BuscarVideoConferenciaDto ):Observable<VideoConferenciaDomainEntity>{
-    //      const caso = new BuscarVideoConferenciaUseCase(this.videoConferenciaService);
-        
-    //      return caso.execute(id.id).pipe(tap((data: VideoConferenciaDomainEntity) =>{
-    //          this.videoConferenciaBuscadaPublisher.publish(data);
-    //      }));
-    //  }
 }

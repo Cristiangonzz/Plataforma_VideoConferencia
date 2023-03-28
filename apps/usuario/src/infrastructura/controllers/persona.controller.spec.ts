@@ -20,8 +20,8 @@ describe('PersonaController', () => {
         {
           provide: PersonaService,
           useValue: {
-            crearPersona: jest.fn(),
-            buscarPersona: jest.fn(),
+            registar: jest.fn(),
+            findOneBy: jest.fn(),
           },
         },
         {
@@ -43,5 +43,17 @@ describe('PersonaController', () => {
     personaService = app.get<PersonaService>(PersonaService);
     personaController = app.get<PersonaController>(PersonaController);
   });
+
+//   it('should return "Hello World!"', () => {
+//     // Arrange
+//     const mockData = 'Hello World!';
+//     const expected = 'Hello World!';
+//     jest.spyOn(PersonaService, 'registar').mockReturnValue(mockData);
+//     // Act
+//     const result = appController.getHello();
+//     // Assert
+//     expect(result).toEqual(expected);
+//     expect(PersonaService.getHello).toHaveBeenCalled();
+//   });
 
 });

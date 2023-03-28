@@ -30,7 +30,7 @@ export class PersonaController {
                 console.log(error);
             }));
     }
-
+    
      @Get('buscar')
      buscarPersona(@Body() id: BuscarMail ):Observable<PersonaDomainEntity>{
         const caso = new BuscarPersonaUseCase(this.personaService);
