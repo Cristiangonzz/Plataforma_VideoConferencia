@@ -14,17 +14,17 @@ export class AudioConferenciaMongoService
     crearAudioConferencia(dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
         return this.audioConferenciaRepository.registar(dato);
     }
-    findAll(): Observable<AudioConferenciaSchema[]> {
-        return this.audioConferenciaRepository.findAll();
-    }
-    findOneBy(id: string): Observable<AudioConferenciaSchema> {
-        return this.audioConferenciaRepository.findOneBy(id);
-    }
-    ActualizarAudioConferencia(id: string, dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
-       return this.audioConferenciaRepository.actualizar(id, dato);
-    }
-    eliminarAudioConferencia(id: string): Observable<AudioConferenciaSchema> {
-        return this.audioConferenciaRepository.eliminar(id);
-    }
+    // findAll(): Observable<AudioConferenciaSchema[]> {
+    //     return this.audioConferenciaRepository.findAll();
+    // }
+    // findOneBy(id: string): Observable<AudioConferenciaSchema> {
+    //     return this.audioConferenciaRepository.findOneBy(id);
+    // }
+    // ActualizarAudioConferencia(id: string, dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
+    //    return this.audioConferenciaRepository.actualizar(id, dato);
+    // }
+    // eliminarAudioConferencia(id: string): Observable<AudioConferenciaSchema> {
+    //     return this.audioConferenciaRepository.eliminar(id);
+    // }
 
 }

@@ -14,17 +14,17 @@ export class VideoConferenciaMongoService
     crearVideoConferencia(dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
         return this.videoConferenciaRepository.registar(dato);
     }
-    findAll(): Observable<VideoConferenciaSchema[]> {
-        return this.videoConferenciaRepository.findAll();
-    }
     findOneBy(id: string): Observable<VideoConferenciaSchema> {
         return this.videoConferenciaRepository.findOneBy(id);
     }
-    ActualizarVideoConferencia(id: string, dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
-       return this.videoConferenciaRepository.actualizar(id, dato);
-    }
-    eliminarVideoConferencia(id: string): Observable<VideoConferenciaSchema> {
-        return this.videoConferenciaRepository.eliminar(id);
-    }
+    // findAll(): Observable<VideoConferenciaSchema[]> {
+    //     return this.videoConferenciaRepository.findAll();
+    // }
+    // ActualizarVideoConferencia(id: string, dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
+    //    return this.videoConferenciaRepository.actualizar(id, dato);
+    // }
+    //  eliminarVideoConferencia(id: string): Observable<VideoConferenciaSchema> {
+    //      return this.videoConferenciaRepository.eliminar(id);
+    //  }
 
 }

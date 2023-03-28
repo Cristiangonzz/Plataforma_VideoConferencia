@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { AudioConferenciaDomainEntity } from 'apps/cuenta/src/dominio/model/entidades/audio-conferencia.dominio.entidad';
+import { AudioConferenciaDomainEntity } from '../../../../../cuenta/src/dominio/model/entidades/audio-conferencia.dominio.entidad';
 
 
 @Schema({collection: 'AudioConferencia',versionKey: false})

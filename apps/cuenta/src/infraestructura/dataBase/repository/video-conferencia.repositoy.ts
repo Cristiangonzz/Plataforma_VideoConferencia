@@ -17,14 +17,7 @@ export class VideoConferenciaRepository implements ICuentaRepository<VideoConfer
         console.log("Repo de videoConferencia",dato);
         return from(this.videoConferenciaModel.create(dato));
     }
-    
-    findAll(): Observable<VideoConferenciaSchema[]> {
-        return from(this.videoConferenciaModel.find()) 
-            .pipe(
-                map((dato: videoConferenciaDocument[] ) =>  {
-                    return dato;
-                } ));
-    }
+
 
     findOneBy(id: string): Observable<VideoConferenciaSchema> {
         return from(this.videoConferenciaModel.findById(id))
@@ -35,24 +28,24 @@ export class VideoConferenciaRepository implements ICuentaRepository<VideoConfer
             ));
     }
 
-    actualizar(id:string ,dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
-        return from(this.videoConferenciaModel.findByIdAndUpdate(id, dato, {new: true}))
-            .pipe(
-                 catchError((err : Error) => {
-                 throw new Error('No se encontro la VideoConferencia');
-                 })
-    );
+    // actualizar(id:string ,dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
+    //     return from(this.videoConferenciaModel.findByIdAndUpdate(id, dato, {new: true}))
+    //         .pipe(
+    //              catchError((err : Error) => {
+    //              throw new Error('No se encontro la VideoConferencia');
+    //              })
+    // );
 
-    }
+    // }
 
-    eliminar(id: string): Observable<VideoConferenciaSchema> {
-        return from(this.videoConferenciaModel.findByIdAndDelete(id))
-        .pipe(
-            catchError((err:Error) => {
-                throw new Error('No se encontro la VideoConferencia');
-            })
-        );
-    }
+    // eliminar(id: string): Observable<VideoConferenciaSchema> {
+    //     return from(this.videoConferenciaModel.findByIdAndDelete(id))
+    //     .pipe(
+    //         catchError((err:Error) => {
+    //             throw new Error('No se encontro la VideoConferencia');
+    //         })
+    //     );
+    // }
 
 
 }

@@ -18,41 +18,41 @@ export class AudioConferenciaRepository implements ICuentaRepository<AudioConfer
         return from(this.audioConferenciaModel.create(dato));
     }
     
-    findAll(): Observable<AudioConferenciaSchema[]> {
-        return from(this.audioConferenciaModel.find()) 
-            .pipe(
-                map((dato: AudioConferenciaDocument[] ) =>  {
-                    return dato;
-                } ));
-    }
+    // findAll(): Observable<AudioConferenciaSchema[]> {
+    //     return from(this.audioConferenciaModel.find()) 
+    //         .pipe(
+    //             map((dato: AudioConferenciaDocument[] ) =>  {
+    //                 return dato;
+    //             } ));
+    // }
 
-    findOneBy(id: string): Observable<AudioConferenciaSchema> {
-        return from(this.audioConferenciaModel.findById(id))
-            .pipe(
-                catchError((err:Error) => {
-                    throw new Error(err.message);
-                }
-            ));
-    }
+    // findOneBy(id: string): Observable<AudioConferenciaSchema> {
+    //     return from(this.audioConferenciaModel.findById(id))
+    //         .pipe(
+    //             catchError((err:Error) => {
+    //                 throw new Error(err.message);
+    //             }
+    //         ));
+    // }
 
-    actualizar(id:string ,dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
-        return from(this.audioConferenciaModel.findByIdAndUpdate(id, dato, {new: true}))
-            .pipe(
-                 catchError((err : Error) => {
-                 throw new Error('No se encontro la AudioConferencia');
-                 })
-    );
+    // actualizar(id:string ,dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
+    //     return from(this.audioConferenciaModel.findByIdAndUpdate(id, dato, {new: true}))
+    //         .pipe(
+    //              catchError((err : Error) => {
+    //              throw new Error('No se encontro la AudioConferencia');
+    //              })
+    // );
 
-    }
+    // }
 
-    eliminar(id: string): Observable<AudioConferenciaSchema> {
-        return from(this.audioConferenciaModel.findByIdAndDelete(id))
-        .pipe(
-            catchError((err:Error) => {
-                throw new Error('No se encontro la AudioConferencia');
-            })
-        );
-    }
+    // eliminar(id: string): Observable<AudioConferenciaSchema> {
+    //     return from(this.audioConferenciaModel.findByIdAndDelete(id))
+    //     .pipe(
+    //         catchError((err:Error) => {
+    //             throw new Error('No se encontro la AudioConferencia');
+    //         })
+    //     );
+    // }
 
 
 }
