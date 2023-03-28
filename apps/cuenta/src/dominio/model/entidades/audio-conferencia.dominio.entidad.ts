@@ -3,8 +3,8 @@ import { IAudioConferencia } from '../interfaces/audio-conferencia.dominio.inter
 export class AudioConferenciaDomainEntity implements IAudioConferencia {
    
     anfitrion: string;
-    participantes: string[];
-    audio: boolean;
+    participantes?: string[];
+    audio?: boolean;
 
     constructor(_dato?: IAudioConferencia) {
 

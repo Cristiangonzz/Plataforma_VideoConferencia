@@ -1,9 +1,6 @@
  import { Inject, Injectable } from "@nestjs/common";
  import { ClientProxy } from "@nestjs/microservices";
- import { Observable } from "rxjs";
-
- import { IAudioConferencia } from '../../../../dominio/model/interfaces/audio-conferencia.dominio.interfaces';
-
+ import { Observable, map, retry } from "rxjs";
 
  @Injectable()
  export class AudioConferenciaCreadaPublisher {
@@ -12,9 +9,12 @@
          @Inject('CUENTA_SERVICE') private readonly clienProxy: ClientProxy,
      ) { }
 
-     publish(data:IAudioConferencia) : Observable<IAudioConferencia> {
-         return this.clienProxy.emit( 'cuenta.audioConferencia.creada',
-             JSON.stringify({ data})
-         )
+     publish(data:string) : Observable<string> {
+        return this.clienProxy
+        .send('cuenta.audioConferencia.creada',data).pipe(
+            map((res : string) =>   res )
+            // ,
+            // retry(2)
+            );
      }
  }

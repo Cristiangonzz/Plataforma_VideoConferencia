@@ -1,15 +1,9 @@
 
-import { IsString } from "class-validator";
-import { AudioConferenciaSchema } from '../dataBase/schema/audio-conferencia.schema';
+import {  IsEmail } from 'class-validator';
 
-export class CrearAudioConferenciaDTO extends AudioConferenciaSchema {	
+export class CrearAudioConferenciaDTO  {	
 
-    @IsString()
-    url: string;
-
-    @IsString()
+    @IsEmail()
     anfitrion: string;
 
-    @IsString()
-    participantes: string[];
 }

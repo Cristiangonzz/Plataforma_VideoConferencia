@@ -71,6 +71,12 @@
     ],
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/",
+      ".module.ts",
+      "main.ts"
+    ],
     "roots": [
       "<rootDir>/apps/"
     ]

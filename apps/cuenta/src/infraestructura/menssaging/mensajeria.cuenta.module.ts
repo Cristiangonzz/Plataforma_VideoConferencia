@@ -1,10 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
-import { AudioConferenciaActualizadaPublisher } from "./publisher/video-conferencia/audio-conferencia-actualizada.publisher";
 import { VideoConferenciaCreadaPublisher } from "./publisher/video-conferencia/video-conferencia-creada.publisher";
-import { VideoConferenciaBuscadaPublisher } from "./publisher/video-conferencia/video-conferencia-buscada.publisher";
-import { VideoConferenciaActualizadaPublisher } from "./publisher/video-conferencia/video-conferencia-actualizada.publisher";
-import { AudioConferenciaBuscadaPublisher } from "./publisher/video-conferencia/audio-conferencia-buscada.publisher";
 import { AudioConferenciaCreadaPublisher } from "./publisher/video-conferencia/audio-conferencia-creada.publisher";
 @Module({
     imports: [
@@ -26,21 +22,11 @@ import { AudioConferenciaCreadaPublisher } from "./publisher/video-conferencia/a
     providers: [
 
        VideoConferenciaCreadaPublisher ,
-       VideoConferenciaBuscadaPublisher,
-       VideoConferenciaActualizadaPublisher,
-
-       AudioConferenciaActualizadaPublisher ,
-       AudioConferenciaBuscadaPublisher ,
        AudioConferenciaCreadaPublisher,
       
     ],
     exports: [
        VideoConferenciaCreadaPublisher ,
-       VideoConferenciaBuscadaPublisher,
-       VideoConferenciaActualizadaPublisher,
-      
-       AudioConferenciaActualizadaPublisher ,
-       AudioConferenciaBuscadaPublisher ,
        AudioConferenciaCreadaPublisher,
     ],
   })

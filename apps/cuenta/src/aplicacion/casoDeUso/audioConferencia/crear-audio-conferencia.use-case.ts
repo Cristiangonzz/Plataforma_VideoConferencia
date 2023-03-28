@@ -22,6 +22,7 @@ export class CrearAudioConferenciaUseCase {
                     const newAudioConferencia = new AudioConferenciaDomainEntity();
     
                     newAudioConferencia.anfitrion = dato.anfitrion;
+                    
                     newAudioConferencia.participantes = [""];
                     newAudioConferencia.audio = true;
                     
