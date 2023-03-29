@@ -7,6 +7,7 @@ import { RegistrarPersonaDto } from "../dto/registrar-persona.dto";
 import { PersonaDomainEntity } from "../../dominio/model/persona";
 import { RegistrarPersonaoUseCase } from "../../aplicacion/useCase/persona/registrar-persona.use-case";
 import { of,lastValueFrom } from "rxjs";
+import { BuscarPersonaUseCase } from '../../aplicacion/useCase/persona/buscar-persona.use-case';
 
 describe('PersonaController', () => {
 
@@ -55,7 +56,7 @@ describe('PersonaController', () => {
   });
 
   describe('create', () => {
-    it('debe crear una nueva VideoConferencia', async () => {
+    it('debe crear una nueva Persona', async () => {
       // Arrange
       const persona:RegistrarPersonaDto = {
           nombre: "Cristian",              
@@ -95,6 +96,48 @@ describe('PersonaController', () => {
     expect(await lastValueFrom(result) ).toEqual((expectedPersona));
      })
       });
+
+      describe('buscar', () => {
+        it('debe retornar una  persona ya creada', async () => {
+          // Arrange
+          const persona:RegistrarPersonaDto = {
+              nombre: "Cristian",              
+              mail:  "cris@gmail.com",
+              clave: "123456",
+              setPassword: expect.any(Function),
+            }
+    
+          const mockaPersona : PersonaDomainEntity= 
+            {
+              nombre: "Cristian",              
+              mail:  "cris@gmail.com",
+              clave: "123456",
+              setPassword: expect.any(Function),
+            };
+    
+          const expectedPersona:PersonaDomainEntity = 
+            {
+              nombre: "Cristian",              
+              mail:  "cris@gmail.com",
+              clave: "123456",
+              setPassword: expect.any(Function),
+            };
+    
+          //Mockear el caso de uso y el publisher
+         jest
+          .spyOn(BuscarPersonaUseCase.prototype, 'execute')
+          .mockReturnValue(of(mockaPersona));
+    
+        jest.spyOn(eventoBuscar, 'publish').mockReturnValue(of(persona));
+    
+        // Act
+    
+        const result = api.buscarPersona(persona);
+    
+        // Assert
+        expect(await lastValueFrom(result) ).toEqual((expectedPersona));
+         })
+          });
   });
 
 
