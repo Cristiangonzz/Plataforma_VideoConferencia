@@ -70,6 +70,7 @@ describe('VideoConferenciaRepository', () => {
             compartirArchivo:false ,
             presentacion: false, 
           };
+          
           jest.spyOn(videoConferenciaModel, 'create').mockResolvedValue(mockUsuario as any);
     
           // Act

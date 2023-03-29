@@ -11,33 +11,52 @@ export class CrearVideoConferenciaUseCase {
 
         execute(dato: IVideoConferencia): Observable<VideoConferenciaDomainEntity> {
 
-            const observable = from(validate(dato));
 
-            return observable.pipe(
-                mergeMap((errors : ValidationError[]) => {
-                    if (errors.length > 0) {
-                        throw new Error('Datos incorrectos');
-                    }
-    
-                    const newVideoConferencia = new VideoConferenciaDomainEntity();
+            const newVideoConferencia = new VideoConferenciaDomainEntity();
 
-                    newVideoConferencia.anfitrion = dato.anfitrion;
-                    newVideoConferencia.participante = [""];
-                    newVideoConferencia.chatVivo = true;
-                    newVideoConferencia.grabacion = false;
-                    newVideoConferencia.pizzarra = false;
-                    newVideoConferencia.compartirArchivo = false;
-                    newVideoConferencia.presentacion = false;
-                    
-                    
-                    return of(newVideoConferencia);
-                }),
-                mergeMap((VideoConferencia:VideoConferenciaDomainEntity) => {
-                    return this.videoConferenciaService.crearVideoConferencia(VideoConferencia);
-                }),
-                catchError((error:Error) => {
-                    throw new Error(error.message);
-                }));
+                newVideoConferencia.anfitrion = dato.anfitrion;
+                   
+                newVideoConferencia.participante = [""];
+                newVideoConferencia.chatVivo = true;
+                newVideoConferencia.grabacion = false;
+                newVideoConferencia.pizzarra = false;
+                newVideoConferencia.compartirArchivo = false;
+                newVideoConferencia.presentacion = false;
+
+                return this.videoConferenciaService.crearVideoConferencia(newVideoConferencia);
+
+         
          
     }
 }
+
+   // const observable = from(validate(dato));
+
+            // return observable.pipe(
+            //     mergeMap((errors : ValidationError[]) => {
+            //         if (errors.length > 0) {
+            //             throw new Error('Datos incorrectos');
+            //         }
+    
+            //         const newVideoConferencia = new VideoConferenciaDomainEntity();
+
+            //         newVideoConferencia.anfitrion = dato.anfitrion;
+                    
+            //         newVideoConferencia.participante = [""];
+            //         newVideoConferencia.chatVivo = true;
+            //         newVideoConferencia.grabacion = false;
+            //         newVideoConferencia.pizzarra = false;
+            //         newVideoConferencia.compartirArchivo = false;
+            //         newVideoConferencia.presentacion = false;
+                    
+                    
+            //         return of(newVideoConferencia);
+            //     }),
+            //     mergeMap((VideoConferencia:VideoConferenciaDomainEntity) => {
+            //         return this.videoConferenciaService.crearVideoConferencia(VideoConferencia);
+            //     })
+            //     ,
+            //     catchError((error:Error) => {
+            //         throw new Error(error.message);
+            //     })
+            //     );
