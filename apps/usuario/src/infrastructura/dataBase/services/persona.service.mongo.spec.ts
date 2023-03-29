@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PersonaMongoService } from './persona.service.mongo';
 import { PersonaRepository } from '../repository/persona.repositoy';
 import { PersonaSchema } from '../schema/persona.shema';
-import { of } from 'rxjs';
+import { lastValueFrom, of } from 'rxjs';
 
 
 describe('PersonaMongoService', () => {
@@ -31,52 +31,87 @@ describe('PersonaMongoService', () => {
   });
 
 
-  it('FindOneBy tine que retornar "Observable<PersonaChema>"', () => {
-    // Arrange
-
-    const mockData = new PersonaSchema();
-    mockData.nombre = "cristian";
-    mockData.mail = "cris@gmail.com"
-    mockData.clave = "123456";
-
-    const expected = new PersonaSchema();
-    expected.nombre = "cristian";
-    expected.mail = "cris@gmail.com"
-    expected.clave = "123456";
+  describe('findOneBy', () => {
+    it('Debe de retornar una empresa', (done) => {
+      // Arrange
 
 
-    jest.spyOn(personaRepository, 'findOneBy').mockReturnValue(of(mockData));
+    const persona = "cristian@gmail.com"
+    
+    const mockData =(
+      {
+        _id : "abc1234",
+        nombre : "cristian",
+        mail : "cris@gmail.com",
+        clave : "123456"
+      }
+    );
+  
 
-    // Act
-    const result = personaMongoService.findOneBy(mockData.mail);
+    const expected =(
+      {
+        _id : "abc1234",
+        nombre : "cristian",
+        mail : "cris@gmail.com",
+        clave : "123456"
+      }
+    );
+      jest.spyOn(personaRepository, 'findOneBy').mockReturnValue(of(mockData) as any);
 
-    // Assert
-    expect(result).toEqual(of(expected));
-    expect(personaRepository.registar).toHaveBeenCalled();
+      // Act
+      const result = personaMongoService.findOneBy(persona);
+
+      // Assert
+
+      result.subscribe({
+        next: (persona) => expect(persona).toEqual(expected),
+        complete: () => { 
+          done();
+        },
+      });
+    });
   });
 
-
-  it('Registrar tiene que retornar "Observable<PersonaChema>"', () => {
+  it('Registrar tiene que retornar "Observable<PersonaChema>"', async () =>  {
     // Arrange
 
-    const mockData = new PersonaSchema();
-    mockData.nombre = "cristian";
-    mockData.mail = "cris@gmail.com"
-    mockData.clave = "123456";
+    const persona : PersonaSchema=(
+      {
+        nombre : "cristian",
+        mail : "cris@gmail.com",
+        clave : "123456",
+        setPassword: expect.any(Function)
+      }
+    );
 
-    const expected = new PersonaSchema();
-    expected.nombre = "cristian";
-    expected.mail = "cris@gmail.com";
-    expected.clave = "123456";
+    const mockData =(
+      {
+        _id : "abc1234",
+        nombre : "cristian",
+        mail : "cris@gmail.com",
+        clave : "123456"
+      }
+    );
+  
+
+    const expected =(
+      {
+        _id : "abc1234",
+        nombre : "cristian",
+        mail : "cris@gmail.com",
+        clave : "123456"
+      }
+    );
+   
 
 
-    jest.spyOn(personaRepository, 'registar').mockReturnValue(of(mockData));
+    jest.spyOn(personaRepository, 'registar').mockReturnValue(of(mockData) as any);
 
     // Act
-    const result = personaMongoService.registar(mockData);
+    const result = personaMongoService.registar(persona);
 
     // Assert
-    expect(result).toEqual(of(expected));
+    expect(await lastValueFrom(result)).toEqual(expected);
     expect(personaRepository.registar).toHaveBeenCalled();
   });
 });

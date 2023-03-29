@@ -51,7 +51,8 @@ describe('VideoConferenciaRepository', () => {
 
           const mockUsuario = 
             {
-            _id: '641c70d41964e9445f593bcc', anfitrion : "cris@gmail.com",
+            _id: '641c70d41964e9445f593bcc',
+            anfitrion : "cris@gmail.com",
             participante: [""],
             chatVivo: true,
             grabacion: false,
@@ -61,6 +62,7 @@ describe('VideoConferenciaRepository', () => {
             };
           const expectedUsuario = {
             _id: '641c70d41964e9445f593bcc',
+            anfitrion : "cris@gmail.com",
             participante: [""],
             chatVivo: true,
             grabacion: false,
