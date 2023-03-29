@@ -2,7 +2,7 @@
 ------------Cuenta-----------------------
 
 repositorios : Ok
-dto:
+dto: OK
 caso de usos:
 servicio:
 controladores:
@@ -13,7 +13,7 @@ filters
 
 ------------Usuarios-----------------------
 repositorios : Ok
-dto:
+dto: OK 
 caso de usos:
 servicio:
 controladores:

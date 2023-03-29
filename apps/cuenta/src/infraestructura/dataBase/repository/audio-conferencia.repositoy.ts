@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 
 import { Model } from "mongoose";
-import { Observable, catchError, from, map } from "rxjs";
+import { Observable, from } from "rxjs";
 
 import { ICuentaRepository } from '../../../dominio/repositorios/cuenta-conferencia.repositorio';
 import { AudioConferenciaDocument, AudioConferenciaSchema } from "../schema/audio-conferencia.schema";
@@ -17,8 +17,9 @@ export class AudioConferenciaRepository implements ICuentaRepository<AudioConfer
     registar(dato: AudioConferenciaSchema): Observable<AudioConferenciaSchema> {
         return from(this.audioConferenciaModel.create(dato));
     }
-    
-    // findAll(): Observable<AudioConferenciaSchema[]> {
+}
+
+ // findAll(): Observable<AudioConferenciaSchema[]> {
     //     return from(this.audioConferenciaModel.find()) 
     //         .pipe(
     //             map((dato: AudioConferenciaDocument[] ) =>  {
@@ -53,6 +54,3 @@ export class AudioConferenciaRepository implements ICuentaRepository<AudioConfer
     //         })
     //     );
     // }
-
-
-}

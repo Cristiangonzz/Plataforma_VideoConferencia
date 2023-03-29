@@ -1,7 +1,5 @@
 import { plainToInstance } from 'class-transformer';
 import { validate, IsEmail } from 'class-validator';
-import { RegistrarPersonaDto } from '../registrar-persona.dto';
-import { Body } from '@nestjs/common';
 import { BuscarMail } from '../buscar-mail..dto';
 
 
@@ -18,8 +16,8 @@ describe('BuscarMail', () => {
 
   it('tiene que contener el valor mail', () => {
     // Arrange
-    const mail = 'cristian';
-    const expected = 'cristian';
+    const mail = 'cristian@gmail.com';
+    const expected = 'cristian@gmail.com';
     const type = 'string';
 
     // Act

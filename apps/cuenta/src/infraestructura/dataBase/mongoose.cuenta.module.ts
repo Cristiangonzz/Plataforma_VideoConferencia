@@ -6,7 +6,7 @@ import { VideoConferenciaRepository } from './repository/video-conferencia.repos
 import { ConfigService } from '@nestjs/config';
 import { VideoconferenciaFactory, VideoConferenciaSchema } from './schema/video-conferencia.schema';
 import { AudioConferenciaSchema, AudioconferenciaFactory } from './schema/audio-conferencia.schema';
-import { AudioConferenciaMongoService } from './services/audio-conferencia.service.mongo copy';
+import { AudioConferenciaMongoService } from './services/audio-conferencia.service.mongo';
 import { AudioConferenciaRepository } from './repository/audio-conferencia.repositoy';
 
 @Module({

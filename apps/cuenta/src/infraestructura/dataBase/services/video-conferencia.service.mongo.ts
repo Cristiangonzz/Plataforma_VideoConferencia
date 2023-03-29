@@ -14,9 +14,9 @@ export class VideoConferenciaMongoService
     crearVideoConferencia(dato: VideoConferenciaSchema): Observable<VideoConferenciaSchema> {
         return this.videoConferenciaRepository.registar(dato);
     }
-    findOneBy(id: string): Observable<VideoConferenciaSchema> {
-        return this.videoConferenciaRepository.findOneBy(id);
-    }
+    // findOneBy(id: string): Observable<VideoConferenciaSchema> {
+    //     return this.videoConferenciaRepository.findOneBy(id);
+    // }
     // findAll(): Observable<VideoConferenciaSchema[]> {
     //     return this.videoConferenciaRepository.findAll();
     // }
