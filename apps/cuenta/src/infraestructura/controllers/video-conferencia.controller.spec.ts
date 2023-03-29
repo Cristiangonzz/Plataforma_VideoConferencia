@@ -6,6 +6,8 @@ import { VideoConferenciaService } from '../services/video-conferencia.service';
 import { VideoConferenciaCreadaPublisher } from '../menssaging/publisher/video-conferencia/video-conferencia-creada.publisher';
 import { VideoConferenciaDomainEntity } from '../../dominio/model/entidades/video-conferencia.dominio.entidad';
 import { CrearVideoConferenciaUseCase } from '../../aplicacion/casoDeUso/videoConferencia/crear-video-conferencia.use-case';
+import { CrearVideoConferenciaDTO } from '../dto/crear-video-conferencia.dto';
+import { VideoConferenciaSchema } from '../dataBase/schema/video-conferencia.schema';
 
 describe('VideoConferenciaController', () => {
 
@@ -47,11 +49,11 @@ describe('VideoConferenciaController', () => {
   describe('create', () => {
     it('debe crear una nueva VideoConferencia', async () => {
       // Arrange
-      const video = {
-        anfitrion:  "cris@gmail.com",
+      const video:CrearVideoConferenciaDTO = {
+            anfitrion:  "cris@gmail.com",
         }
 
-      const mockaVideo = 
+      const mockaVideo : VideoConferenciaDomainEntity= 
         {
             anfitrion:  "cris@gmail.com",
             participante: [""],
@@ -63,7 +65,7 @@ describe('VideoConferenciaController', () => {
         
         };
 
-      const expectedVideo = 
+      const expectedVideo:VideoConferenciaDomainEntity = 
         {
             anfitrion:  "cris@gmail.com",
             participante: [""],
@@ -73,21 +75,22 @@ describe('VideoConferenciaController', () => {
             compartirArchivo : false,
             presentacion : false,
         };
-      //Mockear el caso de uso 
-       const crearVideoConferenciaUseCaseMock = jest.spyOn(CrearVideoConferenciaUseCase.prototype, 'execute');
-       crearVideoConferenciaUseCaseMock.mockReturnValue(of(new VideoConferenciaDomainEntity(mockaVideo)));
+      //Mockear el caso de uso y el publisher
+     jest
+      .spyOn(CrearVideoConferenciaUseCase.prototype, 'execute')
+      .mockReturnValue(of(mockaVideo));
 
-      jest.spyOn(evento, 'publisher').mockReturnValue(of(video.anfitrion));
+    jest.spyOn(evento, 'publisher').mockReturnValue(of(video.anfitrion));
 
-      // Act
+    // Act
 
-      const result = api.crearVideoConferencia(video);
+    const result = api.crearVideoConferencia(video);
 
-      // Assert
-      expect(await lastValueFrom(result)).toEqual(expectedVideo);
-    })
-
+    // Assert
+    expect(await lastValueFrom(result) ).toEqual((expectedVideo));
+     })
+      });
   });
 
 
-});
+ 
