@@ -1,0 +1,22 @@
+
+------------Cuenta-----------------------
+
+repositorios : Ok
+dto:
+caso de usos:
+servicio:
+controladores:
+eventos:
+guards:
+filters
+
+
+------------Usuarios-----------------------
+repositorios : Ok
+dto:
+caso de usos:
+servicio:
+controladores:
+eventos:
+guards:
+filters

@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 
-import { Observable, catchError, from, map } from "rxjs";
+import { Observable, catchError, from } from "rxjs";
 
-import { IUsuarioRepository } from "apps/usuario/src/dominio/repositories/usuario-repository-base.repositoy";
+import { IUsuarioRepository } from "../../../../src/dominio/repositories/usuario-repository-base.repositoy";
 import { Model } from "mongoose";
 import { EmpresaSchema, EmpresaDocument } from '../schema/empresa.shema';
 
@@ -16,18 +16,9 @@ export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
     registar(empresa: EmpresaSchema): Observable<EmpresaSchema> {
         return from(this.empresaModel.create(empresa));
     }
-    
-    findAll(): Observable<EmpresaSchema[]> {
-        //este find me devulve un arreglo de lo que le pase como parametro en repostiory y lo tipeo con empresaDocument
-        return from(this.empresaModel.find()) //Como estoy usando lo inyectado y lo tipeo con empresaDocument entonces siempre me va a devolver un array de empresaDocument
-            .pipe(
-                map((empresa: EmpresaDocument[] ) =>  {
-                    return empresa;
-                } ));
-    }
 
     findOneBy(id: string): Observable<EmpresaSchema> {
-        return from(this.empresaModel.findOne({mail: id}))
+        return from(Promise.resolve(this.empresaModel.findOne({mail: id}))) // Promise.resolve() para convertir el resultado devuelto por findOne() en una promesa
             .pipe(
                 catchError((err:Error) => {
                     throw new Error(err.message);
@@ -35,23 +26,23 @@ export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
             ));
     }
 
-    actualizar(id:string ,empresa: EmpresaSchema): Observable<EmpresaSchema> {
-        return from(this.empresaModel.findByIdAndUpdate(id, empresa, {new: true}))
-            .pipe(
-                 catchError((err : Error) => {
-                 throw new Error('No se encontro la empresa');
-                 })
-    );
-    }
-//
-    eliminar(id: string): Observable<EmpresaSchema> {
-        return from(this.empresaModel.findByIdAndDelete(id))
-        .pipe(
-            catchError((err:Error) => {
-                throw new Error('No se encontro la empresa');
-            })
-        );
-    }
+//     actualizar(id:string ,empresa: EmpresaSchema): Observable<EmpresaSchema> {
+//         return from(this.empresaModel.findByIdAndUpdate(id, empresa, {new: true}))
+//             .pipe(
+//                  catchError((err : Error) => {
+//                  throw new Error('No se encontro la empresa');
+//                  })
+//     );
+//     }
+// //
+//     eliminar(id: string): Observable<EmpresaSchema> {
+//         return from(this.empresaModel.findByIdAndDelete(id))
+//         .pipe(
+//             catchError((err:Error) => {
+//                 throw new Error('No se encontro la empresa');
+//             })
+//         );
+//     }
 
 
 }

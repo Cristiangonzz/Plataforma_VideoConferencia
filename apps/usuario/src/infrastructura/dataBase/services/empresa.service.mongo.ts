@@ -15,18 +15,18 @@ export class EmpresaMongoService
     registar(empresa: EmpresaSchema): Observable<EmpresaSchema> {
         return this.empresaRepository.registar(empresa);
     }
-    findAll(): Observable<EmpresaSchema[]> {
-        return this.empresaRepository.findAll();
-    }
     findOneBy(id: string): Observable<EmpresaSchema> {
         return this.empresaRepository.findOneBy(id);
     }
-    Actualizar(id: string, empresa: EmpresaSchema): Observable<EmpresaSchema> {
-       return this.empresaRepository.actualizar(id, empresa);
-    }
-    eliminar(id: string): Observable<EmpresaSchema> {
-        return this.empresaRepository.eliminar(id);
-    }
+    // findAll(): Observable<EmpresaSchema[]> {
+    //     return this.empresaRepository.findAll();
+    // }
+    // Actualizar(id: string, empresa: EmpresaSchema): Observable<EmpresaSchema> {
+    //    return this.empresaRepository.actualizar(id, empresa);
+    // }
+    // eliminar(id: string): Observable<EmpresaSchema> {
+    //     return this.empresaRepository.eliminar(id);
+    // }
 
 
 
