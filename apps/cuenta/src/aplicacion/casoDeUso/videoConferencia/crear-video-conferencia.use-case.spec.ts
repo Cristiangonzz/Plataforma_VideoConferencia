@@ -1,51 +1,82 @@
-
-import { of } from 'rxjs';
-
-import { IVideoConferencia } from '../../../dominio/model/interfaces/video-conferencia.dominio.interfaces';
-import { IVideoConferenciaDomainService } from '../../../dominio/services/video-conferencia.service';
-import { VideoConferenciaDomainEntity } from '../../../dominio/model/entidades/video-conferencia.dominio.entidad';
+import { AudioConferenciaSchema } from '../../../../src/infraestructura/dataBase/schema/audio-conferencia.schema';
+import { VideoConferenciaMongoService } from '../../../../src/infraestructura/dataBase/services/video-conferencia.service.mongo';
+import { Observable } from 'rxjs';
+import { CrearAudioConferenciaUseCase } from '../audioConferencia/crear-audio-conferencia.use-case';
 import { CrearVideoConferenciaUseCase } from './crear-video-conferencia.use-case';
+import { VideoConferenciaSchema } from '../../../../src/infraestructura/dataBase/schema/video-conferencia.schema';
+
 
 describe('CrearVideoConferenciaUseCase', () => {
   let useCase: CrearVideoConferenciaUseCase;
-  let videoConferenciaService: IVideoConferenciaDomainService<VideoConferenciaDomainEntity>;
+  let service: VideoConferenciaMongoService;
 
   beforeEach(() => {
-    videoConferenciaService  = jasmine.createSpyObj('IVideoConferenciaDomainService', ['crearVideoConferencia']);
-    useCase = new CrearVideoConferenciaUseCase(videoConferenciaService);
+    service = {
+      crearVideoConferencia: jest.fn(),
+    } as any as  VideoConferenciaMongoService;
+    useCase = new CrearVideoConferenciaUseCase(service);
   });
 
-  it('should create a new video conferencia', () => {
-    // Arrange
-    const dato: IVideoConferencia = { anfitrion: 'Anfitrion name' };
-    const newVideoConferencia = new VideoConferenciaDomainEntity();
-    newVideoConferencia.anfitrion = dato.anfitrion;
-    newVideoConferencia.participante = [""];
-    newVideoConferencia.chatVivo = true;
-    newVideoConferencia.grabacion = false;
-    newVideoConferencia.pizzarra = false;
-    newVideoConferencia.compartirArchivo = false;
-    newVideoConferencia.presentacion = false;
+  it('verificar que se defina', () => {
+    expect(useCase).toBeDefined();
+  });
 
-    videoConferenciaService.crearVideoConferencia.and.returnValue(of(newVideoConferencia));
+  it('llamar a service.registrar', (done) => {
+    // Arrange
+    const _id = '641c65deff0153dd0f36bf5';
+    const payload = 
+    { 
+      anfitrion: "cris@gmail.com",
+      participante:[""],
+      chatVivo: true,
+      grabacion: false,
+      pizzarra: false,
+      compartirArchivo: false,
+      presentacion: false 
+    };
+    const mockData : VideoConferenciaSchema = 
+    { 
+      anfitrion: "cris@gmail.com",
+      participante:[""],
+      chatVivo: true,
+      grabacion: false,
+      pizzarra: false,
+      compartirArchivo: false,
+      presentacion: false  
+    };
+    const expectedData = 
+    {
+      anfitrion: "cris@gmail.com",
+      participante:[""],
+      chatVivo: true,
+      grabacion: false,
+      pizzarra: false,
+      compartirArchivo: false,
+      presentacion: false 
+    };
+    const expectedInstanceType = Observable<VideoConferenciaSchema>;
+    const stubCrear = jest.fn(() =>
+        new Observable<VideoConferenciaSchema>((subscriber) => {
+          subscriber.next(mockData);
+          subscriber.complete();
+        }),
+    );
+    jest.spyOn(service, 'crearVideoConferencia').mockReturnValue(stubCrear());
 
     // Act
-    const result$ = useCase.execute(dato);
+    const result = useCase.execute(payload);
 
     // Assert
-    result$.subscribe((result) => {
-      expect(videoConferenciaService.crearVideoConferencia).toHaveBeenCalledWith(newVideoConferencia);
-      expect(result).toEqual(newVideoConferencia);
+    expect(service.crearVideoConferencia).toHaveBeenCalledWith(mockData);
+    expect(result).toBeInstanceOf(expectedInstanceType);
+    result.subscribe({
+      next: (data) => {
+        expect(data).toEqual(expectedData);
+      },
+      complete: () => done(),
     });
   });
 });
-// import { Test, TestingModule } from "@nestjs/testing";
-// import { lastValueFrom, of } from 'rxjs';
-// import { CrearVideoConferenciaUseCase } from "./crear-video-conferencia.use-case";
-// import { VideoConferenciaMongoService } from "../../../../src/infraestructura/dataBase/services/video-conferencia.service.mongo";
-// import { IVideoConferencia } from "../../../../src/dominio/model/interfaces/video-conferencia.dominio.interfaces";
-
-
 
 
 

@@ -4,7 +4,6 @@ import { CrearAudioConferenciaUseCase } from '../../aplicacion/casoDeUso/audioCo
 import { VideoConferenciaController } from './video-conferencia.controller';
 import { VideoConferenciaService } from '../services/video-conferencia.service';
 import { VideoConferenciaCreadaPublisher } from '../menssaging/publisher/video-conferencia/video-conferencia-creada.publisher';
-import { VideoConferenciaDomainEntity } from '../../dominio/model/entidades/video-conferencia.dominio.entidad';
 import { CrearVideoConferenciaUseCase } from '../../aplicacion/casoDeUso/videoConferencia/crear-video-conferencia.use-case';
 import { CrearVideoConferenciaDTO } from '../dto/crear-video-conferencia.dto';
 import { VideoConferenciaSchema } from '../dataBase/schema/video-conferencia.schema';
@@ -53,7 +52,7 @@ describe('VideoConferenciaController', () => {
             anfitrion:  "cris@gmail.com",
         }
 
-      const mockaVideo : VideoConferenciaDomainEntity= 
+      const mockaVideo : VideoConferenciaSchema = 
         {
             anfitrion:  "cris@gmail.com",
             participante: [""],
@@ -65,7 +64,7 @@ describe('VideoConferenciaController', () => {
         
         };
 
-      const expectedVideo:VideoConferenciaDomainEntity = 
+      const expectedVideo:VideoConferenciaSchema = 
         {
             anfitrion:  "cris@gmail.com",
             participante: [""],

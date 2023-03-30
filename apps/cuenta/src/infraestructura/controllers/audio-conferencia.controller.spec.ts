@@ -3,8 +3,8 @@ import { Observable,lastValueFrom, of } from 'rxjs';
 import { AudioConferenciaService } from '../services/audio-conferencia.service';
 import { AudioConferenciaController } from './audio-conferencia.controller';
 import { AudioConferenciaCreadaPublisher } from '../menssaging/publisher/video-conferencia/audio-conferencia-creada.publisher';
-import { AudioConferenciaDomainEntity } from '../../dominio/model/entidades/audio-conferencia.dominio.entidad';
 import { CrearAudioConferenciaUseCase } from '../../aplicacion/casoDeUso/audioConferencia/crear-audio-conferencia.use-case';
+import { AudioConferenciaSchema } from '../dataBase/schema/audio-conferencia.schema';
 
 describe('AudioConferenciaController', () => {
 
@@ -50,21 +50,21 @@ describe('AudioConferenciaController', () => {
         anfitrion: "cris@gmail.com",
         }
 
-      const mockaAudio = 
+      const mockaAudio :AudioConferenciaSchema= 
         {
         anfitrion : "cris@gmail.com",
         participantes: ["a"],
         audio: true,
         };
 
-      const expectedAudio:AudioConferenciaDomainEntity = {
+      const expectedAudio:AudioConferenciaSchema = {
         anfitrion : "cris@gmail.com",
         participantes: ["a"],
         audio: true,
       };
       //Mockear el caso de uso 
        const crearAudioConferenciaUseCaseMock = jest.spyOn(CrearAudioConferenciaUseCase.prototype, 'execute');
-       crearAudioConferenciaUseCaseMock.mockReturnValue(of(new AudioConferenciaDomainEntity(mockaAudio)));
+       crearAudioConferenciaUseCaseMock.mockReturnValue(of(new AudioConferenciaSchema(mockaAudio)));
 
       jest.spyOn(evento, 'publish').mockReturnValue(of(audio.anfitrion));
 

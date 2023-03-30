@@ -1,71 +1,65 @@
+import { Observable } from 'rxjs';
 
-import { Test, TestingModule } from "@nestjs/testing";
+import { CrearAudioConferenciaUseCase } from './crear-audio-conferencia.use-case';
+import { AudioConferenciaSchema } from '../../../../src/infraestructura/dataBase/schema/audio-conferencia.schema';
+import { AudioConferenciaMongoService } from '../../../../src/infraestructura/dataBase/services/audio-conferencia.service.mongo';
 
-import { lastValueFrom, of } from 'rxjs';
-import { AudioConferenciaMongoService } from "../../../../src/infraestructura/dataBase/services/audio-conferencia.service.mongo";
-import { CrearAudioConferenciaUseCase } from "./crear-audio-conferencia.use-case";
+describe('CrearAudioConferenciaUseCase', () => {
+  let useCase: CrearAudioConferenciaUseCase;
+  let service: AudioConferenciaMongoService;
 
+  beforeEach(() => {
+    service = {
+      crearAudioConferencia: jest.fn(),
+    } as any as  AudioConferenciaMongoService;
+    useCase = new CrearAudioConferenciaUseCase(service);
+  });
 
+  it('verificar que se defina', () => {
+    expect(useCase).toBeDefined();
+  });
 
+  it('llamar a service.registrar', (done) => {
+    // Arrange
+    const _id = '641c65deff0153dd0f36bf5';
+    const payload = 
+    { 
+      anfitrion: "cris@gmail.com",
+      participantes:[""],
+      audio:true, 
+    };
+    const mockData = 
+    { 
+      anfitrion: "cris@gmail.com",
+      participantes:[""],
+      audio:true,  
+    };
+    const expectedData = 
+    {
+      anfitrion: "cris@gmail.com",
+      participantes:[""],
+      audio:true,  
+    };
+    const expectedInstanceType = Observable<AudioConferenciaSchema>;
+    const stubCrear = jest.fn(() =>
+        new Observable<AudioConferenciaSchema>((subscriber) => {
+          subscriber.next(mockData);
+          subscriber.complete();
+        }),
+    );
+    jest.spyOn(service, 'crearAudioConferencia').mockReturnValue(stubCrear());
 
-describe('crearAudioConferenciaUseCase', () => {
-    let crearAudioConferenciaUseCase: CrearAudioConferenciaUseCase;
-    let audioConferenciaMongoService: AudioConferenciaMongoService;
-  
-    beforeEach(async () => {
-      const module: TestingModule = await Test.createTestingModule({
-        providers: [
-            CrearAudioConferenciaUseCase,
-          {
-            provide: AudioConferenciaMongoService,
-            useValue: {
-                crearAudioConferencia: jest.fn(),
-    
-            },
-          },
-        ],
-      }).compile();
+    // Act
+    const result = useCase.execute(payload);
 
-      crearAudioConferenciaUseCase = module.get<CrearAudioConferenciaUseCase>(CrearAudioConferenciaUseCase);
-      audioConferenciaMongoService = module.get<AudioConferenciaMongoService>(AudioConferenciaMongoService);
-      
+    // Assert
+    expect(service.crearAudioConferencia).toHaveBeenCalledWith(mockData);
+    expect(result).toBeInstanceOf(expectedInstanceType);
+    result.subscribe({
+      next: (data) => {
+        expect(data).toEqual(expectedData);
+      },
+      complete: () => done(),
     });
-  
-    it('should be defined', () => {
-      expect(crearAudioConferenciaUseCase).toBeDefined();
-    });
-  
-
-    describe('create', () => {
-        it('debe crear una nueva audioConferencia', async () => {
-          // Arrange
-          const audio = {
-            anfitrion: "cris@gmail.com",
-            }
-
-          const mockaAudio= 
-            {
-            _id: '641c70d41964e9445f593bcc',
-            anfitrion : "cris@gmail.com",
-            participantes: [""],
-            audio: true,
-            };
-
-          const expectedAudio = {
-            _id: '641c70d41964e9445f593bcc',
-            anfitrion : "cris@gmail.com",
-            participantes: [""],
-            audio: true,
-          };
-          
-          jest.spyOn(audioConferenciaMongoService, 'crearAudioConferencia').mockReturnValue(of(mockaAudio));
-    
-          // Act
-          const result = crearAudioConferenciaUseCase.execute(audio);
-    
-          // Assert
-          expect(await lastValueFrom(result)).toEqual(expectedAudio);
-        });
-      });
-    
-    });
+  });
+});

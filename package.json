@@ -76,7 +76,9 @@
       "/node_modules/",
       "/test/",
       ".module.ts",
-      "main.ts"
+      "main.ts",
+      ".config.ts",
+      "usuario/src/infrastructura/dataBase/config "
     ],
     "roots": [
       "<rootDir>/apps/"

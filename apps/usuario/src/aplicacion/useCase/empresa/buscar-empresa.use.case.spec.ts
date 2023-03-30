@@ -23,13 +23,19 @@ describe('BuscarEmpresaUseCase', () => {
     const _id = '641c65deff0153dd0f36bf5';
     const payload = 
     { 
+        nombre: "cristian",
         mail: "cris@gmail.com",
+        clave: "123",
+        setPassword: expect.any(Function),
+        cantidadEmpleado: 1,
+        rut: 123,
+        rubro: "deporte", 
     };
     const mockData = 
     { 
         nombre: "cristian",
         mail: "cris@gmail.com",
-        clave: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", 
+        clave: "123", 
         setPassword: expect.any(Function),
 
         cantidadEmpleado: 1,
@@ -40,7 +46,7 @@ describe('BuscarEmpresaUseCase', () => {
     {
         nombre: "cristian",
         mail: "cris@gmail.com",
-        clave: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", 
+        clave: "123", 
         setPassword: expect.any(Function),
 
         cantidadEmpleado: 1,
@@ -57,10 +63,10 @@ describe('BuscarEmpresaUseCase', () => {
     jest.spyOn(service, 'findOneBy').mockReturnValue(stubRegistrar());
 
     // Act
-    const result = useCase.execute(payload);
+    const result = useCase.execute(payload.mail);
 
     // Assert
-    expect(service.findOneBy).toHaveBeenCalledWith(mockData);
+    expect(service.findOneBy).toHaveBeenCalledWith(mockData.mail);
     expect(result).toBeInstanceOf(expectedInstanceType);
     result.subscribe({
       next: (data) => {

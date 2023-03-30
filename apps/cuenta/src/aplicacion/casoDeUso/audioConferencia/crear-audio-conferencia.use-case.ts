@@ -3,15 +3,17 @@ import { ValidationError, validate } from "class-validator";
 import { AudioConferenciaDomainEntity } from "../../../../src/dominio/model/entidades/audio-conferencia.dominio.entidad";
 import { IAudioConferencia } from "../../../../src/dominio/model/interfaces/audio-conferencia.dominio.interfaces";
 import { IAudioConferenciaDomainService } from "../../../../src/dominio/services/audio-conferencia.service";
+import { AudioConferenciaMongoService } from '../../../infraestructura/dataBase/services/audio-conferencia.service.mongo';
+import { AudioConferenciaSchema } from '../../../infraestructura/dataBase/schema/audio-conferencia.schema';
 
 
 export class CrearAudioConferenciaUseCase {  
     
-    constructor(private readonly AudioConferenciaService: IAudioConferenciaDomainService<AudioConferenciaDomainEntity>) { }
+    constructor(private readonly AudioConferenciaService: AudioConferenciaMongoService) { }
 
-        execute(dato: IAudioConferencia): Observable<AudioConferenciaDomainEntity> {
+        execute(dato: IAudioConferencia): Observable<AudioConferenciaSchema> {
            
-            const newAudioConferencia = new AudioConferenciaDomainEntity();
+            const newAudioConferencia = new AudioConferenciaSchema();
 
                 newAudioConferencia.anfitrion = dato.anfitrion;
                 newAudioConferencia.participantes = [""];
