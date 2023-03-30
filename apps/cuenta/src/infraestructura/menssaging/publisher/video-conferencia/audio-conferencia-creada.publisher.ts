@@ -1,6 +1,6 @@
  import { Inject, Injectable } from "@nestjs/common";
  import { ClientProxy } from "@nestjs/microservices";
- import { Observable, map, retry } from "rxjs";
+ import { Observable, map, retry ,pipe } from "rxjs";
 
  @Injectable()
  export class AudioConferenciaCreadaPublisher {
@@ -13,8 +13,8 @@
         return this.clienProxy
         .send('cuenta.audioConferencia.creada',data).pipe(
             map((res : string) =>   res )
-            // ,
-            // retry(2)
+            ,
+             retry(2)
             );
      }
  }

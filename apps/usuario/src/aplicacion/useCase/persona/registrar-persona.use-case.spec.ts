@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { RegistrarPersonaoUseCase } from './registrar-persona.use-case';
 import { PersonaSchema } from '../../../../src/infrastructura/dataBase/schema/persona.shema';
 import { PersonaMongoService } from '../../../../src/infrastructura/dataBase/services/persona.service.mongo';
+import { PersonaDomainEntity } from '../../../dominio/model/persona';
 
 describe('RegistrarPersonaoUseCase', () => {
   let useCase: RegistrarPersonaoUseCase;
@@ -21,20 +22,21 @@ describe('RegistrarPersonaoUseCase', () => {
   it('llamar a service.registrar', (done) => {
     // Arrange
     const _id = '641c65deff0153dd0f36bf5';
-    const payload = 
+    const payload: PersonaDomainEntity = 
     { 
         nombre: "cristian",
         mail: "cris@gmail.com",
         clave: "", 
+        setPassword: expect.any(Function),
     };
-    const mockData = 
+    const mockData: PersonaDomainEntity = 
     { 
         nombre: "cristian",
         mail: "cris@gmail.com",
         clave: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", 
         setPassword: expect.any(Function),
     };
-    const expectedData = 
+    const expectedData : PersonaDomainEntity = 
     {
         nombre: "cristian",
         mail: "cris@gmail.com",

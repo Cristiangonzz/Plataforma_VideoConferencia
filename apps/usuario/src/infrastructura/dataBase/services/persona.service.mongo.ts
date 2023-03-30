@@ -17,6 +17,12 @@ export class PersonaMongoService
     findOneBy(id: string): Observable<PersonaSchema> {
         return this.personaRepository.findOneBy(id);
     }
+    Actualizar(id: string, persona: PersonaSchema): Observable<PersonaSchema> {
+        return this.personaRepository.actualizar(id, persona);
+     }
+    Eliminar(id: string): Observable<PersonaSchema> {
+         return this.personaRepository.eliminar(id);
+     }
    
 
 }

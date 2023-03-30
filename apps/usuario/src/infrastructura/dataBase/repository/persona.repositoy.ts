@@ -35,23 +35,23 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
     //             } ));
     // }
 
-    // actualizar(id:string ,persona: PersonaSchema): Observable<PersonaSchema> {
-    //     return from(this.personaModel.findByIdAndUpdate(id, persona, {new: true}))
-    //         .pipe(
-    //              catchError((err : Error) => {
-    //              throw new Error('No se encontro la persona');
-    //              })
-    // );
-    // }
+     actualizar(id:string ,persona: PersonaSchema): Observable<PersonaSchema> {
+         return from(this.personaModel.findByIdAndUpdate(id, persona, {new: true}))
+             .pipe(
+                  catchError((err : Error) => {
+                  throw new Error('No se encontro la persona');
+                  })
+     );
+     }
 
-    // eliminar(id: string): Observable<PersonaSchema> {
-    //     return from(this.personaModel.findByIdAndDelete(id))
-    //     .pipe(
-    //         catchError((err:Error) => {
-    //             throw new Error('No se encontro la persona');
-    //         })
-    //     );
-    // }
+    eliminar(id: string): Observable<PersonaSchema> {
+        return from(this.personaModel.findByIdAndDelete(id))
+        .pipe(
+            catchError((err:Error) => {
+                throw new Error('No se encontro la persona');
+            })
+        );
+    }
 
 
 }
