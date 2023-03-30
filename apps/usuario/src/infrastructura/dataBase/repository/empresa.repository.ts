@@ -48,7 +48,7 @@ export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
     actualizar(id: string, persona: EmpresaSchema): Observable<EmpresaSchema> {
         throw new Error("Method not implemented.");
     }
-    eliminar(id: string): Observable<EmpresaSchema> {
+    eliminar(id: string): Observable<boolean> {
         throw new Error("Method not implemented.");
     }
 

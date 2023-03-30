@@ -4,8 +4,9 @@ import { PersonaRegistradaPublisher } from "./publisher/persona/persona-registra
 import { PersonaBuscadaPublisher } from "./publisher/persona/persona-buscada.publisher";
 import { EmpresaBuscadaPublisher } from "./publisher/empresa/empresa-buscada.publisher";
 import { EmpresaRegistradaPublisher } from "./publisher/empresa/empresa-registrada.publisher";
-import { PersonaBuscadaVideoConferenciaPublisher } from "./publisher/cuenta/cuenta-video-conferencia/persona-buscada-video-conferencia.publisher";
-import { RespuestaVideoConferenciadaRegistradaPublisher } from "./publisher/cuenta/cuenta-video-conferencia/respuesta-crear-video-conferencia.publisher";
+import { PersonaEditadaPublisher } from "./publisher/persona/persona-editada.publisher";
+import { PersonaEliminadaPublisher } from "./publisher/persona/persona-eliminada.publisher";
+
 @Module({
     imports: [
         ClientsModule.register([
@@ -27,25 +28,30 @@ import { RespuestaVideoConferenciadaRegistradaPublisher } from "./publisher/cuen
       //Usuario
       PersonaRegistradaPublisher,
       PersonaBuscadaPublisher,
+      PersonaEditadaPublisher,
+      PersonaEliminadaPublisher,
 
       EmpresaRegistradaPublisher,
       EmpresaBuscadaPublisher,
 
       //cuenta
-      PersonaBuscadaVideoConferenciaPublisher,
-      RespuestaVideoConferenciadaRegistradaPublisher,
+      // PersonaBuscadaVideoConferenciaPublisher,
+      // RespuestaVideoConferenciadaRegistradaPublisher,
     ],
     exports: [
       //cuenta 
-      PersonaBuscadaVideoConferenciaPublisher,
-      RespuestaVideoConferenciadaRegistradaPublisher,
+      // PersonaBuscadaVideoConferenciaPublisher,
+      // RespuestaVideoConferenciadaRegistradaPublisher,
 
       //usuario
       EmpresaRegistradaPublisher,
       EmpresaBuscadaPublisher,
       
       PersonaRegistradaPublisher,
-      PersonaBuscadaPublisher],
+      PersonaBuscadaPublisher,
+      PersonaEditadaPublisher,
+      PersonaEliminadaPublisher,
+    ],
   })
   export class MensajeriaModule {}
   

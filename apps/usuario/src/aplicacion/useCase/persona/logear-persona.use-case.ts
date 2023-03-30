@@ -12,22 +12,24 @@ export class LogearPersonaoUseCase {
 
         execute(dato: ILoginModelDomain): Observable<PersonaDomainEntity> {
 
-            const observable = from(validate(dato));
 
-            return observable.pipe(
-                mergeMap((errors : ValidationError[]) => {
-                    if (errors.length > 0) {
-                        throw new Error('Datos incorrectos');
-                    }
+            
+            // const observable = from(validate(dato));
+
+            // return observable.pipe(
+            //     mergeMap((errors : ValidationError[]) => {
+            //         if (errors.length > 0) {
+            //             throw new Error('Datos incorrectos');
+            //         }
     
 
-                    const newPersona =  new BuscarPersonaUseCase(this.usuarioService).execute(dato.mail);
+            //         const newPersona =  new BuscarPersonaUseCase(this.usuarioService).execute(dato.mail);
                   
-                    return newPersona;
-                }),
-                catchError((error:Error) => {
-                    throw new Error(error.message);
-                }));
+            //         return newPersona;
+            //     }),
+            //     catchError((error:Error) => {
+            //         throw new Error(error.message);
+            //     }));
          
     }
 
