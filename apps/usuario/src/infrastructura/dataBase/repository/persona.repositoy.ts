@@ -1,11 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 
 import { Observable, catchError, from, map } from "rxjs";
 
 import { PersonaDocument, PersonaSchema } from '../schema/persona.shema';
 import { IUsuarioRepository } from "apps/usuario/src/dominio/repositories/usuario-repository-base.repositoy";
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 
 @Injectable()
 export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
@@ -38,15 +38,17 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
      }
 
     eliminar(id: string): Observable<boolean> {
-        return from(this.personaModel.findByIdAndDelete(id))
-        .pipe(
-            map( () => true)
-            ,
-            catchError((err:Error) => {
-                throw new Error('No se encontro la persona');
-            })
-        );
-    }
+        const _id = new Types.ObjectId(id);
+        return from(this.personaModel.findByIdAndDelete(_id)).pipe(
+        catchError((error) => {
+            throw error;
+        }),
+        map((usuario) => {
+            if (!usuario) throw new NotFoundException('Persona no encontrada');
+            return true;
+      }),
+    );
+  }
 
 
 }

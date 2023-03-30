@@ -8,6 +8,11 @@ import { PersonaDomainEntity } from "../../dominio/model/persona";
 import { RegistrarPersonaoUseCase } from "../../aplicacion/useCase/persona/registrar-persona.use-case";
 import { of,lastValueFrom } from "rxjs";
 import { BuscarPersonaUseCase } from '../../aplicacion/useCase/persona/buscar-persona.use-case';
+import { EditarPersonaoUseCase } from '../../aplicacion/useCase/persona/editar-persona.use-case';
+import { PersonaEditadaPublisher } from "../messanging/publisher/persona/persona-editada.publisher";
+import { PersonaEliminadaPublisher } from "../messanging/publisher/persona/persona-eliminada.publisher";
+import { EliminarPersonaoUseCase } from '../../aplicacion/useCase/persona/eliminar-persona.use-case';
+
 
 describe('PersonaController', () => {
 
@@ -15,6 +20,8 @@ describe('PersonaController', () => {
   let servicio: PersonaService;
   let eventoCreada: PersonaRegistradaPublisher;
   let eventoBuscar: PersonaBuscadaPublisher;
+  let eventoEditar: PersonaEditadaPublisher;
+  let eventoEliminar: PersonaEliminadaPublisher;
 
   const _id = '641c65deff0153dd0f36bf5';
 
@@ -37,6 +44,18 @@ describe('PersonaController', () => {
             publish : jest.fn()
           },
       },
+      {
+        provide: PersonaEditadaPublisher,
+        useValue: {
+          publish : jest.fn()
+        },
+    },
+    {
+      provide: PersonaEliminadaPublisher,
+      useValue: {
+        publish : jest.fn()
+      },
+  },
       ],
       controllers: [PersonaController],
     }).compile();
@@ -45,6 +64,8 @@ describe('PersonaController', () => {
     servicio = module.get<PersonaService>(PersonaService);
     eventoCreada = module.get<PersonaRegistradaPublisher>(PersonaRegistradaPublisher);
     eventoBuscar = module.get<PersonaBuscadaPublisher>(PersonaBuscadaPublisher);
+    eventoEditar = module.get<PersonaEditadaPublisher>(PersonaEditadaPublisher);
+    eventoEliminar = module.get<PersonaEliminadaPublisher>(PersonaEliminadaPublisher);
   });
 
 
@@ -53,9 +74,11 @@ describe('PersonaController', () => {
     expect(servicio).toBeDefined();
     expect(eventoCreada).toBeDefined();
     expect(eventoBuscar).toBeDefined();
+    expect(eventoEditar).toBeDefined();
+    expect(eventoEliminar).toBeDefined();
   });
 
-  describe('create', () => {
+  describe('Buscar', () => {
     it('debe crear una nueva Persona', async () => {
       // Arrange
       const persona:RegistrarPersonaDto = {
@@ -138,6 +161,123 @@ describe('PersonaController', () => {
         expect(await lastValueFrom(result) ).toEqual((expectedPersona));
          })
           });
+
+describe('crear', () => {
+  it('debe crear una nueva Persona', async () => {
+    // Arrange
+    const persona:RegistrarPersonaDto = {
+        nombre: "Cristian",              
+        mail:  "cris@gmail.com",
+        clave: "123456",
+        setPassword: expect.any(Function),
+      }
+
+    const mockaPersona : PersonaDomainEntity= 
+      {
+        nombre: "Cristian",              
+        mail:  "cris@gmail.com",
+        clave: "123456",
+        setPassword: expect.any(Function),
+      };
+
+    const expectedPersona:PersonaDomainEntity = 
+      {
+        nombre: "Cristian",              
+        mail:  "cris@gmail.com",
+        clave: "123456",
+        setPassword: expect.any(Function),
+      };
+
+    //Mockear el caso de uso y el publisher
+    jest
+    .spyOn(RegistrarPersonaoUseCase.prototype, 'execute')
+    .mockReturnValue(of(mockaPersona));
+
+  jest.spyOn(eventoCreada, 'publish').mockReturnValue(of(persona));
+
+  // Act
+
+  const result = api.crearPersona(persona);
+
+  // Assert
+  expect(await lastValueFrom(result) ).toEqual((expectedPersona));
+    })
+    });
+        
+describe('Editar', () => {
+  it('debe retornar una nueva persona edita', async () => {
+    // Arrange
+    const persona:RegistrarPersonaDto = {
+        nombre: "Cristian",              
+        mail:  "cris@gmail.com",
+        clave: "123456",
+        setPassword: expect.any(Function),
+      }
+
+    const mockaPersona : PersonaDomainEntity= 
+      {
+        nombre: "Cristian",              
+        mail:  "cris@gmail.com",
+        clave: "123456",
+        setPassword: expect.any(Function),
+      };
+
+    const expectedPersona:PersonaDomainEntity = 
+      {
+        
+        nombre: "Cristian",              
+        mail:  "cris@gmail.com",
+        clave: "123456",
+        setPassword: expect.any(Function),
+      };
+
+    //Mockear el caso de uso y el publisher
+    jest
+    .spyOn(EditarPersonaoUseCase.prototype, 'execute')
+    .mockReturnValue(of(mockaPersona));
+
+  jest.spyOn(eventoEditar, 'publish').mockReturnValue(of(persona));
+
+  // Act
+
+  const result = api.editarPersona(_id,persona);
+
+  // Assert
+  expect(await lastValueFrom(result) ).toEqual((expectedPersona));
+    })
+    });
+    
+    describe('Eliminar', () => {
+      it('debe retornar un true', async () => {
+        // Arrange
+        const persona = true;
+    
+        const mockaPersona : PersonaDomainEntity= 
+          {
+            nombre: "Cristian",              
+            mail:  "cris@gmail.com",
+            clave: "123456",
+            setPassword: expect.any(Function),
+          };
+    
+        const expectedPersona = true;
+    
+        //Mockear el caso de uso y el publisher
+        jest
+        .spyOn(EliminarPersonaoUseCase.prototype, 'execute')
+        .mockReturnValue(of(persona));
+    
+      jest.spyOn(eventoEliminar, 'publish').mockReturnValue(of(persona));
+    
+      // Act
+    
+      const result = api.eliminarPersona(_id);
+      // Assert
+      expect(await lastValueFrom(result) ).toEqual((expectedPersona));
+        })
+        });
+
+          
   });
 
 

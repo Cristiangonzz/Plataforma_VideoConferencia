@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, Put ,Delete} from '@nestjs/common';
 import {  RegistrarPersonaDto } from '../dto/registrar-persona.dto';
 import { PersonaService } from '../service/persona.service';
 import { PersonaRegistradaPublisher } from '../messanging/publisher/persona/persona-registrado.publisher';
-import { Observable, catchError, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { PersonaDomainEntity } from '../../dominio/model/persona';
 import { BuscarMail } from '../dto/buscar-mail..dto';
 import { RegistrarPersonaoUseCase } from '../../aplicacion/useCase/persona/registrar-persona.use-case';
@@ -11,8 +11,9 @@ import { PersonaBuscadaPublisher } from '../messanging/publisher/persona/persona
 import { EditarPersonaoUseCase } from '../../aplicacion/useCase/persona/editar-persona.use-case';
 import { PersonaEditadaPublisher } from '../messanging/publisher/persona/persona-editada.publisher';
 import { PersonaEliminadaPublisher } from '../messanging/publisher/persona/persona-eliminada.publisher';
-import { PersonaSchema } from '../dataBase/schema/persona.shema';
+import { PersonaDocument, PersonaSchema } from '../dataBase/schema/persona.shema';
 import { EliminarPersonaoUseCase } from '../../aplicacion/useCase/persona/eliminar-persona.use-case';
+
 
 
 @Controller('persona')
@@ -65,12 +66,14 @@ export class PersonaController {
              }));
        }
 
-    @Delete('eliminar')
-        eliminarPersona(@Body() id: BuscarMail ):Observable<boolean>{
-            const caso = new EliminarPersonaoUseCase(this.personaService);
+    @Delete('eliminar/:id')
+        eliminarPersona(@Param('id') id: string ):Observable<boolean>{
 
-            return caso.execute(id.mail).pipe(tap((data: boolean) =>{
-                this.personaEliminadaPublisher.publish(data);
+            const caso = new EliminarPersonaoUseCase(this.personaService)
+            return caso.execute(id)
+                .pipe(
+                    tap((data: boolean) =>{
+                    this.personaEliminadaPublisher.publish(data);
             }),
             catchError((error) => {
                 // Manejo de errores
