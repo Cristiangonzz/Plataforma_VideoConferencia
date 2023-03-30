@@ -13,6 +13,7 @@ export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
     constructor(
         @InjectModel(EmpresaSchema.name) private readonly empresaModel: Model<EmpresaDocument>) { }
     
+    
     registar(empresa: EmpresaSchema): Observable<EmpresaSchema> {
         return from(this.empresaModel.create(empresa));
     }
@@ -44,5 +45,11 @@ export class EmpresaRepository implements IUsuarioRepository<EmpresaSchema>{
 //         );
 //     }
 
+    actualizar(id: string, persona: EmpresaSchema): Observable<EmpresaSchema> {
+        throw new Error("Method not implemented.");
+    }
+    eliminar(id: string): Observable<EmpresaSchema> {
+        throw new Error("Method not implemented.");
+    }
 
 }

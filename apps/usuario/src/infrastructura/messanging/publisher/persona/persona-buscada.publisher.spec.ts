@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ClientProxy } from '@nestjs/microservices';
 import { of } from 'rxjs';
-import { PersonaBuscadaPublisher } from './persona-buscada.oublisher';
+import { PersonaBuscadaPublisher } from './persona-buscada.publisher';
 import { IDatosBasicosModel } from 'apps/usuario/src/dominio/model/interface/datos-basicos.interface';
 
 describe('PersonaBuscadaPublisher', () => {

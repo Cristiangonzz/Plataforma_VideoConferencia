@@ -27,13 +27,6 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
                 }
             ));
     }
-    // findAll(): Observable<PersonaSchema[]> {
-    //     return from(this.personaModel.find()) //Como estoy usando lo inyectado y lo tipeo con PersonaDocument entonces siempre me va a devolver un array de PersonaDocument
-    //         .pipe(
-    //             map((persona: PersonaDocument[] ) =>  {
-    //                 return persona;
-    //             } ));
-    // }
 
      actualizar(id:string ,persona: PersonaSchema): Observable<PersonaSchema> {
          return from(this.personaModel.findByIdAndUpdate(id, persona, {new: true}))
@@ -44,9 +37,11 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
      );
      }
 
-    eliminar(id: string): Observable<PersonaSchema> {
+    eliminar(id: string): Observable<boolean> {
         return from(this.personaModel.findByIdAndDelete(id))
         .pipe(
+            map( () => true)
+            ,
             catchError((err:Error) => {
                 throw new Error('No se encontro la persona');
             })
@@ -55,3 +50,11 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
 
 
 }
+
+// findAll(): Observable<PersonaSchema[]> {
+    //     return from(this.personaModel.find()) //Como estoy usando lo inyectado y lo tipeo con PersonaDocument entonces siempre me va a devolver un array de PersonaDocument
+    //         .pipe(
+    //             map((persona: PersonaDocument[] ) =>  {
+    //                 return persona;
+    //             } ));
+    // }

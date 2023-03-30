@@ -1,5 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { PersonaBuscadaPublisher } from "../messanging/publisher/persona/persona-buscada.oublisher";
+import { PersonaBuscadaPublisher } from "../messanging/publisher/persona/persona-buscada.publisher";
 import { PersonaRegistradaPublisher } from "../messanging/publisher/persona/persona-registrado.publisher";
 import { PersonaService } from "../service/persona.service";
 import { PersonaController } from "./persona.controller";
