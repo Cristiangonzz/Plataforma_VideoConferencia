@@ -1,7 +1,7 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { Test, TestingModule } from "@nestjs/testing";
 import { getModelToken } from "@nestjs/mongoose";
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom ,of} from 'rxjs';
 
 import { PersonaRepository } from "./persona.repositoy";
 import { PersonaSchema } from "../schema/persona.shema";
@@ -24,6 +24,8 @@ describe('PersonaRepository', () => {
             useValue: {
                 create: jest.fn(),
                 findOne: jest.fn(),
+                findByIdAndUpdate: jest.fn(),
+                findByIdAndDelete: jest.fn(),
             },
           },
         ],
@@ -110,5 +112,68 @@ describe('PersonaRepository', () => {
           });
         });
       })
+
+      describe('Editar', () => {
+        it('debe editar una nueva Persona', async () => {
+          // Arrange
+          const _id = "5f593bcc";
+          const persona : PersonaSchema= {
+            nombre: "Uruguay",
+            mail: "uruguay@gmail.com",
+            clave: "123",
+        
+            setPassword: expect.any(Function),
+            }
+
+          const mockUsuario : PersonaSchema = 
+            {
+
+              nombre: "Uruguay",
+              mail: "uruguay@gmail.com",
+              clave: "123",
+              setPassword: expect.any(Function),
+            };
+          const expectedUsuario:PersonaSchema = {
+            nombre: "Uruguay",
+              mail: "uruguay@gmail.com",
+              clave: "123",
+              setPassword: expect.any(Function),
+            
+          };
+          jest.spyOn(personaModel, 'findByIdAndUpdate').mockReturnValue(of(mockUsuario) as any);
+    
+          // Act
+          const result = personaRepository.actualizar(_id,persona);
+    
+          // Assert
+          expect(await lastValueFrom(result)).toEqual(expectedUsuario);
+        });
+      });
+
+      describe('Eliminar', () => {
+        it('debe eliminar una nueva Persona y retornar true', async () => {
+          // Arrange
+          const _id = new Types.ObjectId("641f1e79398d97022720784b");
+
+
+          const mockUsuario  = 
+            {
+
+              nombre: "Uruguay",
+              mail: "uruguay@gmail.com",
+              clave: "123",
+              setPassword: expect.any(Function),
+            };
+          const expectedUsuario: boolean = true;
+
+          jest.spyOn(personaModel, 'findByIdAndDelete').mockReturnValue(of(mockUsuario) as any);
+    
+          // Act
+          const result = personaRepository.eliminar(_id.toString());
+    
+          // Assert
+          expect(await lastValueFrom(result)).toEqual(expectedUsuario);
+        });
+      });
     
     });

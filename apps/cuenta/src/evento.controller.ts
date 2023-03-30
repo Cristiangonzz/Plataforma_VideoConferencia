@@ -5,11 +5,8 @@ import { IPersonaCuenta } from "./dominio/model/interfaces/persona.domain.interf
 @Controller()
 export class EventoController {
 
-    constructor() {
-        
-    }
+    constructor() {}
 
-  
     //Persona de repoUsuario
 
     @EventPattern('usuario.persona.registrada')
