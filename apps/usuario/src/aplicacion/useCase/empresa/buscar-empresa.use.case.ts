@@ -1,23 +1,15 @@
-import { Observable, catchError, mergeMap, of, throwIfEmpty } from "rxjs";
-import { EmpresaDomainEntity } from '../../../dominio/model/empresa.model';
-import { IEmpresaDomainService } from '../../../dominio/services/empresa.domain.service';
+import { Observable} from "rxjs";
+import { EmpresaMongoService } from "apps/usuario/src/infrastructura/dataBase/services/empresa.service.mongo";
+import { EmpresaSchema } from "apps/usuario/src/infrastructura/dataBase/schema/empresa.shema";
 
 
 
 export class BuscarEmpresaUseCase {  
   
-    constructor(private readonly empresaService: IEmpresaDomainService<EmpresaDomainEntity>) { }
+    constructor(private readonly empresaService: EmpresaMongoService) { }
 
-    execute(dato: string): Observable<EmpresaDomainEntity> {
-
-         return of(dato).pipe(
-             throwIfEmpty(() => new Error('Dato requerido')),
-             mergeMap((datoValidado :string) => {
-                 return this.empresaService.findOneBy(datoValidado);
-             }),
-             catchError((err : Error) => {
-                 throw new Error('No se encontró la Empresa');
-             })
-         );
+    execute(dato: string): Observable<EmpresaSchema> {
+        return this.empresaService.findOneBy(dato);
+        
     }
 }
