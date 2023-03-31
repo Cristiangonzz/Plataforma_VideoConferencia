@@ -10,6 +10,11 @@ export class EmpresaRegistradaPublisher {
         @Inject('USUARIO_SERVICE') private readonly clienProxy: ClientProxy,
     ) { }
 
+    /**
+     * It takes a RegistrarEmpresaDto object, converts it to a string, and emits it to the server.
+     * @param {RegistrarEmpresaDto} data - The data to be sent to the server.
+     * @returns The Observable is being returned.
+     */
     publish(data:RegistrarEmpresaDto) : Observable<RegistrarEmpresaDto> {
         return this.clienProxy.emit( 'usuario.empresa.registrada',
             JSON.stringify({ data})

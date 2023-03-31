@@ -44,4 +44,15 @@ describe('PersonaDomainEntity', () => {
         // Assert
         expect(entity.clave).toBeDefined();
       });
+
+  describe('setPassword', () => {
+    it('debería cifrar la contraseña utilizando sha256', () => {
+      const persona = new PersonaDomainEntity();
+      const clave = 'contraseña';
+      persona.clave = clave;
+      const hash = 'edf9cf90718610ee7de53c0dcc250739239044de9ba115bb0ca6026c3e4958a5';
+      persona.setPassword(clave);
+      expect(persona.clave).toBe(hash);
+    });
+  });
 });

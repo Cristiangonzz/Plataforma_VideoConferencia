@@ -8,8 +8,10 @@ import { BuscarMail } from "../dto/buscar-mail..dto";
 import { RegistrarEmpresaDto } from "../dto/registrar-empresa.dto";
 import { RegistrarEmpresaUseCase } from "../../aplicacion/useCase/empresa/registrar-empresa.use-case";
 import { BuscarEmpresaUseCase } from '../../aplicacion/useCase/empresa/buscar-empresa.use.case';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 
+@ApiTags('Empresa')
 @Controller('empresa')
 export class EmpresaController {
     constructor(
@@ -18,7 +20,14 @@ export class EmpresaController {
         private readonly empresaBuscadaPublisher: EmpresaBuscadaPublisher,
     ) {}
 
+    @ApiOperation ({summary: "Crear  Empresa"})
     @Post('/crear')
+     /**
+      * The function crearEmpresa() takes a RegistrarEmpresaDto object as a parameter, and returns an
+      * Observable of type EmpresaDomainEntity.
+      * @param {RegistrarEmpresaDto} Empresa - RegistrarEmpresaDto
+      * @returns The observable is being returned.
+      */
      crearEmpresa(@Body() Empresa: RegistrarEmpresaDto):Observable<EmpresaDomainEntity> {
         const caso = new RegistrarEmpresaUseCase(this.empresaService);
         return caso.execute(Empresa)
@@ -31,7 +40,14 @@ export class EmpresaController {
             }));
     }
 
+    @ApiOperation ({summary: "Buscar  Empresa"})
      @Get('buscar')
+     /**
+      * BuscarEmpresa" is a function that receives a parameter of type "BuscarMail" and returns an
+      * observable of type "EmpresaDomainEntity
+      * @param {BuscarMail} id - BuscarMail
+      * @returns The observable is being returned.
+      */
      buscarEmpresa(@Body() id: BuscarMail ):Observable<EmpresaDomainEntity>{
         const caso = new BuscarEmpresaUseCase(this.empresaService);
         

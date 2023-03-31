@@ -8,6 +8,5 @@ export interface IPersonaDomainService<T extends PersonaDomainEntity = PersonaDo
     findOneBy(id: string): Observable<T>
     actualizar(id :string ,persona: T): Observable<T>;
     eliminar(id: string): Observable<boolean>;
-    
 
 }

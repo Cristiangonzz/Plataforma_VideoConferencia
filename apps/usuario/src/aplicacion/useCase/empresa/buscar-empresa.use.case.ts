@@ -8,6 +8,12 @@ export class BuscarEmpresaUseCase {
   
     constructor(private readonly empresaService: EmpresaMongoService) { }
 
+    /**
+     * The function execute() takes a string as a parameter and returns an Observable of type
+     * EmpresaSchema.
+     * @param {string} dato - string
+     * @returns An Observable of type EmpresaSchema
+     */
     execute(dato: string): Observable<EmpresaSchema> {
         return this.empresaService.findOneBy(dato);
         

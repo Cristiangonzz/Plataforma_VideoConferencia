@@ -10,6 +10,12 @@ export class PersonaEditadaPublisher {
         @Inject('USUARIO_SERVICE') private readonly clienProxy: ClientProxy,
     ) { }
 
+    /**
+     * The function publish() takes an object of type IDatosBasicosModel as a parameter and returns an
+     * Observable of type IDatosBasicosModel.
+     * @param {IDatosBasicosModel} data - IDatosBasicosModel
+     * @returns An observable.
+     */
     publish(data:IDatosBasicosModel) : Observable<IDatosBasicosModel> {
         return this.clienProxy.emit( 'usuario.persona.editada',
             JSON.stringify({ data})

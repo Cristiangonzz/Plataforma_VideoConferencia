@@ -8,6 +8,12 @@ export class RegistrarEmpresaUseCase {
   
         constructor(private readonly empresaService: EmpresaMongoService) { }
 
+        /**
+         * It takes a DTO, creates a new EmpresaSchema, sets the properties of the new EmpresaSchema to
+         * the values of the DTO, and then returns the result of the empresaService.registar() function
+         * @param {RegistrarEmpresaDto} dato - RegistrarEmpresaDto
+         * @returns An Observable of type EmpresaSchema
+         */
         execute(dato: RegistrarEmpresaDto): Observable<EmpresaSchema> {
             
             const newEmpresa = new EmpresaSchema();

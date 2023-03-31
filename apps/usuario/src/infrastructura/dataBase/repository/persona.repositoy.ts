@@ -14,11 +14,23 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
         @InjectModel(PersonaSchema.name) private readonly personaModel: Model<PersonaDocument>
         ) { }
     
+    /**
+     * This function takes a PersonaSchema object as a parameter, and returns an Observable of type
+     * PersonaSchema.
+     * @param {PersonaSchema} persona - PersonaSchema
+     * @returns An Observable of type PersonaSchema.
+     */
     registar(persona: PersonaSchema): Observable<PersonaSchema> {
         return from(this.personaModel.create(persona));
     }
     
     
+    /**
+     * It returns an Observable of type PersonaSchema, which is a promise that resolves to a
+     * PersonaSchema object.
+     * @param {string} id - string - The id of the document to find.
+     * @returns A promise of a PersonaSchema object.
+     */
     findOneBy(id: string): Observable<PersonaSchema> {
         return from(Promise.resolve(this.personaModel.findOne({mail: id})))
             .pipe(
@@ -28,6 +40,13 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
             ));
     }
 
+     /**
+      * This function takes an id and a person object and returns an observable of the updated person
+      * object.
+      * @param {string} id - The id of the document to update.
+      * @param {PersonaSchema} persona - PersonaSchema
+      * @returns The updated document.
+      */
      actualizar(id:string ,persona: PersonaSchema): Observable<PersonaSchema> {
          return from(this.personaModel.findByIdAndUpdate(id, persona, {new: true}))
              .pipe(
@@ -37,6 +56,11 @@ export class PersonaRepository implements IUsuarioRepository<PersonaSchema>{
      );
      }
 
+    /**
+     * It deletes a document from the database and returns a boolean value.
+     * @param {string} id - string
+     * @returns The return is a boolean value.
+     */
     eliminar(id: string): Observable<boolean> {
         const _id = new Types.ObjectId(id);
         return from(this.personaModel.findByIdAndDelete(_id)).pipe(

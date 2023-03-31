@@ -48,6 +48,7 @@ describe('VideoConferenciaController', () => {
   describe('create', () => {
     it('debe crear una nueva VideoConferencia', async () => {
       // Arrange
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwZXJzb25hIjp7Il9pZCI6IjY0MjY1MWRmZDJjM2ZjOTVkOWRmYTFjZCIsIm5vbWJyZSI6ImNyaXN0aWFuIiwibWFpbCI6ImNyaXNnb256YWxlekBnbWlhbC5jb20iLCJjbGF2ZSI6IjU5OTQ0NzFhYmIwMTExMmFmY2MxODE1OWY2Y2M3NGI0ZjUxMWI5OTgwNmRhNTliM2NhZjVhOWMxNzNjYWNmYzUifSwiaWF0IjoxNjgwMjMzNDU4fQ.KNgjqLcMRJf4fp_ZUCCvMvYxVmFpxaYxJ88Zq5vs6JQ"
       const video:CrearVideoConferenciaDTO = {
             anfitrion:  "cris@gmail.com",
         }
@@ -83,7 +84,7 @@ describe('VideoConferenciaController', () => {
 
     // Act
 
-    const result = api.crearVideoConferencia(video);
+    const result = api.crearVideoConferencia(token,video);
 
     // Assert
     expect(await lastValueFrom(result) ).toEqual((expectedVideo));

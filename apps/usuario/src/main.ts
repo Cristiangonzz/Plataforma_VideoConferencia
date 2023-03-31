@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { UsuarioModule } from './usuario.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(UsuarioModule);
@@ -14,6 +15,16 @@ async function bootstrap() {
       },
     },
   });
+
+  const config = new DocumentBuilder()
+    .setTitle('Usuarios API')
+    .setDescription('Relaciona los Usuarios con las videoconferencias y audiosConferencia')
+    .setVersion('1.0')
+    .addTag('Usuarios')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
   
   await app.startAllMicroservices();
   

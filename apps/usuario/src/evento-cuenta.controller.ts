@@ -14,6 +14,11 @@ export class EventoCuentaController {
 
 
     @MessagePattern('cuenta.videoConferencia.creada')
+    /**
+     * It receives a string, it calls a use case, and it returns an observable of a string
+     * @param {string} data - string
+     * @returns The email of the person.
+     */
     cuentaVideoConferencia(@Payload() data: string):Observable<string>{
         console.log('Mensaje recibido en el receptor: ',data);
 
@@ -28,6 +33,14 @@ export class EventoCuentaController {
     
 
     @MessagePattern('cuenta.audioConferencia.creada')
+    /**
+     * It receives a string, it calls a use case, and it returns an observable of a string
+     * @param {string} data - string
+     * @returns The return is a string, but the return is a string that is the result of a pipe that is
+     * the result of a map that is the result of a pipe that is the result of a map that is the result
+     * of a pipe that is the result of a map that is the result of a pipe that is the result of a map
+     * that is the result of a pipe that is the result of
+     */
     cuentaAudioConferencia(@Payload() data: string):Observable<string>{
         console.log('Mensaje recibido en el receptor: ',data);
 

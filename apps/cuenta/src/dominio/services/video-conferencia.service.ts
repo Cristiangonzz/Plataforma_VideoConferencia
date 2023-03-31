@@ -7,7 +7,3 @@ export interface IVideoConferenciaDomainService<T extends VideoConferenciaDomain
     crearVideoConferencia(dato: T ):Observable<T>;
     
 }
-// findOneBy(id: string): Observable<T>
- // ActualizarVideoConferencia(id: string , dato : T ):Observable<T>;
- // eliminarVideoConferencia(id: string): Observable<T>;
- // findAll(): Observable<T[]>;

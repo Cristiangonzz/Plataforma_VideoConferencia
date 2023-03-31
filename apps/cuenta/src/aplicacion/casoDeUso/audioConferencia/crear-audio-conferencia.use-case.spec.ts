@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { CrearAudioConferenciaUseCase } from './crear-audio-conferencia.use-case';
 import { AudioConferenciaSchema } from '../../../../src/infraestructura/dataBase/schema/audio-conferencia.schema';
 import { AudioConferenciaMongoService } from '../../../../src/infraestructura/dataBase/services/audio-conferencia.service.mongo';
+import { AudioConferenciaDomainEntity } from '../../../dominio/model/entidades/audio-conferencia.dominio.entidad';
 
 describe('CrearAudioConferenciaUseCase', () => {
   let useCase: CrearAudioConferenciaUseCase;
@@ -22,19 +23,19 @@ describe('CrearAudioConferenciaUseCase', () => {
   it('llamar a service.registrar', (done) => {
     // Arrange
     const _id = '641c65deff0153dd0f36bf5';
-    const payload = 
+    const payload: AudioConferenciaDomainEntity = 
     { 
       anfitrion: "cris@gmail.com",
       participantes:[""],
       audio:true, 
     };
-    const mockData = 
+    const mockData:AudioConferenciaSchema = 
     { 
       anfitrion: "cris@gmail.com",
       participantes:[""],
       audio:true,  
     };
-    const expectedData = 
+    const expectedData:AudioConferenciaDomainEntity = 
     {
       anfitrion: "cris@gmail.com",
       participantes:[""],

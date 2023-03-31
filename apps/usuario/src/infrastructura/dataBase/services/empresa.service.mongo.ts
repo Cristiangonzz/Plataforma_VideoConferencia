@@ -12,21 +12,24 @@ export class EmpresaMongoService
  
   constructor(private readonly empresaRepository: EmpresaRepository) {}
 
+    /**
+     * This function takes an object of type EmpresaSchema and returns an Observable of type
+     * EmpresaSchema.
+     * @param {EmpresaSchema} empresa - EmpresaSchema
+     * @returns Observable&lt;EmpresaSchema&gt;
+     */
     registar(empresa: EmpresaSchema): Observable<EmpresaSchema> {
         return this.empresaRepository.registar(empresa);
     }
+    /**
+     * This function returns an Observable of type EmpresaSchema
+     * @param {string} id - string
+     * @returns An Observable of type EmpresaSchema
+     */
     findOneBy(id: string): Observable<EmpresaSchema> {
         return this.empresaRepository.findOneBy(id);
     }
-    // findAll(): Observable<EmpresaSchema[]> {
-    //     return this.empresaRepository.findAll();
-    // }
-    // Actualizar(id: string, empresa: EmpresaSchema): Observable<EmpresaSchema> {
-    //    return this.empresaRepository.actualizar(id, empresa);
-    // }
-    // eliminar(id: string): Observable<EmpresaSchema> {
-    //     return this.empresaRepository.eliminar(id);
-    // }
+   
 
 
 

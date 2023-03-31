@@ -58,4 +58,5 @@ export class EmpresaSchema extends EmpresaDomainEntity {
  */
 export type EmpresaDocument = HydratedDocument<EmpresaSchema>;
 
+/* Creating a schema factory for the EmpresaSchema class. */
 export const EmpresaSchemaFactory = SchemaFactory.createForClass(EmpresaSchema);
