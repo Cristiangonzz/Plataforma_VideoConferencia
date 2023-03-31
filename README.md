@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Son dos aplicacion corriendo en dos monoRepos diferente en un mismo proyecto donde uno monoRepo es de Usuario donde se puede manejar dos entidades de usuario, una es Persona y la otra es Empresa , una como otra se pueden comunicar amigablemente por RabbitMQ con el otro monoRepo para generar instancias de VideoConferencia o AudioConferencia.
 
 ## Installation
 
@@ -32,14 +32,17 @@
 $ npm install
 ```
 
-## Running the app
+## Running the apps
 
 ```bash
 # development
 $ npm run start
 
 # watch mode
-$ npm run start:dev
+$ npm run start-usuario:dev
+
+# watch mode
+$ npm run start-cuenta:dev
 
 # production mode
 $ npm run start:prod
